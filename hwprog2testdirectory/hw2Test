@@ -1,0 +1,112 @@
+Script started on Tue 25 Sep 2018 12:33:37 AM EDT
+groups: cannot find name for group ID 1816144587
+groups: cannot find name for group ID 1816144851
+groups: cannot find name for group ID 1816147342
+groups: cannot find name for group ID 1816147762
+groups: cannot find name for group ID 1816148077
+groups: cannot find name for group ID 1816148269
+groups: cannot find name for group ID 1816150572
+groups: cannot find name for group ID 1816168438
+groups: cannot find name for group ID 1816189668
+groups: cannot find name for group ID 1816194696
+groups: cannot find name for group ID 1816195405
+groups: cannot find name for group ID 1816195642
+groups: cannot find name for group ID 1816197292
+groups: cannot find name for group ID 1816197830
+groups: cannot find name for group ID 1816197889
+groups: cannot find name for group ID 1816388100
+groups: cannot find name for group ID 1816431626
+groups: cannot find name for group ID 1816559825
+groups: cannot find name for group ID 1816605548
+groups: cannot find name for group ID 1816605551
+groups: cannot find name for group ID 1816605572
+groups: cannot find name for group ID 1816606963
+groups: cannot find name for group ID 1816607141
+groups: cannot find name for group ID 1816607809
+groups: cannot find name for group ID 1816608406
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog2testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog2testdirectory$ ./zc[KaZipUpScript.txt 
+Remove the old 'assignment' directory
+Create a new 'assignment' directory
+Descend into 'mydirectory' directory
+Descend into directory ccmoyer_hwprog2
+Execute 'uname' to verify system
+Return from directory ccmoyer_hwprog2
+tar directory ccmoyer_hwprog2
+ccmoyer_hwprog2/
+ccmoyer_hwprog2/xinput2.txt
+ccmoyer_hwprog2/Aprog
+ccmoyer_hwprog2/mycpplint
+ccmoyer_hwprog2/SystemUNAME.txt
+ccmoyer_hwprog2/main.cc
+ccmoyer_hwprog2/main.h
+ccmoyer_hwprog2/xinput1.txt
+gzip directory ccmoyer_hwprog2
+cp gzipped file to 'assignment'
+rm the gzipped file from  ccmoyer_hwprog2
+Return from 'mydirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog2testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog2testdirectory$ ./zbFileCopyScript.txt 
+Remove the old 'testdirectory' directory
+Create a new 'testdirectory' directory
+cp all the submissions from 'assignment' into 'testdirectory'
+Descend into 'testdirectory' directory
+untar directory tarfileccmoyer_hwprog2
+ccmoyer_hwprog2/
+ccmoyer_hwprog2/xinput2.txt
+ccmoyer_hwprog2/Aprog
+ccmoyer_hwprog2/mycpplint
+ccmoyer_hwprog2/SystemUNAME.txt
+ccmoyer_hwprog2/main.cc
+ccmoyer_hwprog2/main.h
+ccmoyer_hwprog2/xinput1.txt
+Remove the tar files
+Return from 'testdirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog2testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog2testdirectory$ ./zcCompileScript.txt 
+Descend into 'testdirectory' directory
+ 
+COMPILING ccmoyer_hwprog2
+rm: cannot remove '*.o': No such file or directory
+g++ -O3 -Wall -std=c++11 -c main.cc
+[01m[Kmain.cc:[m[K In function ‘[01m[Kint main()[m[K’:
+[01m[Kmain.cc:52:21:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (int i = 0; i < points.size(); ++i) {
+[01;32m[K                     ^[m[K
+[01m[Kmain.cc:60:16:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i=0; i<points.size(); ++i) {
+[01;32m[K                ^[m[K
+[01m[Kmain.cc:61:18:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int j=0; j<points.size(); ++j) {
+[01;32m[K                  ^[m[K
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/scanner.cc
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/scanline.cc
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/utils.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o scanner.o scanline.o utils.o
+Return from 'testdirectory' directory
+ 
+COMPILING COMPLETE
+ 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog2testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog2testdirectory$ ./zdExecuteScript.txt 
+Descend into 'testdirectory' directory
+ 
+EXECUTING ccmoyer_hwprog2
+EXECUTION COMPLETE
+Return from 'testdirectory' directory
+ 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog2testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog2testdirectory$ cat testdirectory/ccmoyer_hwprog2/zoutput2.txt 
+Printing Pairs
+40.711,-51.021
+-86.133,-43.095
+95.013,-41.701
+-56.487,36.89
+93.745,39.853
+-30.327,47.195
+73.462,40.24
+26.243,89.615
+-50.069,-79.651
+99.957,-63.91
+Finding Closest Pair
+Closest Pair: 93.745,39.853 and 73.462,40.24
+Distance: 20.2867
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog2testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog2testdirectory$ exit
+exit
+
+Script done on Tue 25 Sep 2018 12:34:13 AM EDT

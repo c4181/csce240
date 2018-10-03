@@ -1,0 +1,5 @@
+4
+soup 2 2.29
+beer 20 6.99
+bread 1 1.99
+cereal 3 3.49

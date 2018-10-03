@@ -1,0 +1,4 @@
+Main: Beginning execution
+Main: infile  '../../adotout5.txt'
+Main: outfile 'zoutput5.txt'
+Main: Ending execution

@@ -1,0 +1,188 @@
+Script started on Sun 30 Sep 2018 10:41:16 PM EDT
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory$ ./zaZipUpScript.txt 
+Remove the old 'assignment' directory
+Create a new 'assignment' directory
+Descend into 'mydirectory' directory
+Descend into directory ccmoyer_hwprog3
+Execute 'uname' to verify system
+Return from directory ccmoyer_hwprog3
+tar directory ccmoyer_hwprog3
+ccmoyer_hwprog3/
+ccmoyer_hwprog3/yreadwritelog.txt
+ccmoyer_hwprog3/yloopout.txt.bup
+ccmoyer_hwprog3/ysquareslog.txt.bup
+ccmoyer_hwprog3/xlog4.txt
+ccmoyer_hwprog3/ydataout.txt
+ccmoyer_hwprog3/yfibout.txt
+ccmoyer_hwprog3/utils.o
+ccmoyer_hwprog3/ylooplog.txt.bup
+ccmoyer_hwprog3/xlog4.txt.bup
+ccmoyer_hwprog3/xlog5.txt.bup
+ccmoyer_hwprog3/xout6.txt
+ccmoyer_hwprog3/xout6.txt.bup
+ccmoyer_hwprog3/ysquareslog.txt
+ccmoyer_hwprog3/ysquaresout.txt
+ccmoyer_hwprog3/ylooplog.txt
+ccmoyer_hwprog3/zushell
+ccmoyer_hwprog3/xlog5.txt
+ccmoyer_hwprog3/ydataout.txt.bup
+ccmoyer_hwprog3/yloopout.txt
+ccmoyer_hwprog3/xlog6.txt.bup
+ccmoyer_hwprog3/dabnamespace.o
+ccmoyer_hwprog3/pullet16interpreter.h
+ccmoyer_hwprog3/zoutput5.txt
+ccmoyer_hwprog3/xout4.txt
+ccmoyer_hwprog3/pullet16interpreter.cc
+ccmoyer_hwprog3/dabnamespace.h
+ccmoyer_hwprog3/Aprog
+ccmoyer_hwprog3/mycpplint
+ccmoyer_hwprog3/pullet16interpreter.o
+ccmoyer_hwprog3/yreadwriteout.txt
+ccmoyer_hwprog3/scanner.o
+ccmoyer_hwprog3/xout4.txt.bup
+ccmoyer_hwprog3/ysquaresout.txt.bup
+ccmoyer_hwprog3/dabnamespace.cc
+ccmoyer_hwprog3/yreadwriteout.txt.bup
+ccmoyer_hwprog3/xout5.txt
+ccmoyer_hwprog3/yfiblog.txt
+ccmoyer_hwprog3/SystemUNAME.txt
+ccmoyer_hwprog3/ydatalog.txt
+ccmoyer_hwprog3/main.cc
+ccmoyer_hwprog3/main.h
+ccmoyer_hwprog3/zlog5.txt
+ccmoyer_hwprog3/main.o
+ccmoyer_hwprog3/yfiblog.txt.bup
+ccmoyer_hwprog3/xout5.txt.bup
+ccmoyer_hwprog3/yfibout.txt.bup
+ccmoyer_hwprog3/ydatalog.txt.bup
+ccmoyer_hwprog3/yreadwritelog.txt.bup
+ccmoyer_hwprog3/scanline.o
+ccmoyer_hwprog3/main.h.bup
+ccmoyer_hwprog3/xlog6.txt
+ccmoyer_hwprog3/zushellcompare
+gzip directory ccmoyer_hwprog3
+cp gzipped file to 'assignment'
+rm the gzipped file from  ccmoyer_hwprog3
+Return from 'mydirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory$ ./zbFileCopyScript.txt 
+Remove the old 'testdirectory' directory
+Create a new 'testdirectory' directory
+cp all the submissions from 'assignment' into 'testdirectory'
+Descend into 'testdirectory' directory
+untar directory tarfileccmoyer_hwprog3
+ccmoyer_hwprog3/
+ccmoyer_hwprog3/yreadwritelog.txt
+ccmoyer_hwprog3/yloopout.txt.bup
+ccmoyer_hwprog3/ysquareslog.txt.bup
+ccmoyer_hwprog3/xlog4.txt
+ccmoyer_hwprog3/ydataout.txt
+ccmoyer_hwprog3/yfibout.txt
+ccmoyer_hwprog3/utils.o
+ccmoyer_hwprog3/ylooplog.txt.bup
+ccmoyer_hwprog3/xlog4.txt.bup
+ccmoyer_hwprog3/xlog5.txt.bup
+ccmoyer_hwprog3/xout6.txt
+ccmoyer_hwprog3/xout6.txt.bup
+ccmoyer_hwprog3/ysquareslog.txt
+ccmoyer_hwprog3/ysquaresout.txt
+ccmoyer_hwprog3/ylooplog.txt
+ccmoyer_hwprog3/zushell
+ccmoyer_hwprog3/xlog5.txt
+ccmoyer_hwprog3/ydataout.txt.bup
+ccmoyer_hwprog3/yloopout.txt
+ccmoyer_hwprog3/xlog6.txt.bup
+ccmoyer_hwprog3/dabnamespace.o
+ccmoyer_hwprog3/pullet16interpreter.h
+ccmoyer_hwprog3/zoutput5.txt
+ccmoyer_hwprog3/xout4.txt
+ccmoyer_hwprog3/pullet16interpreter.cc
+ccmoyer_hwprog3/dabnamespace.h
+ccmoyer_hwprog3/Aprog
+ccmoyer_hwprog3/mycpplint
+ccmoyer_hwprog3/pullet16interpreter.o
+ccmoyer_hwprog3/yreadwriteout.txt
+ccmoyer_hwprog3/scanner.o
+ccmoyer_hwprog3/xout4.txt.bup
+ccmoyer_hwprog3/ysquaresout.txt.bup
+ccmoyer_hwprog3/dabnamespace.cc
+ccmoyer_hwprog3/yreadwriteout.txt.bup
+ccmoyer_hwprog3/xout5.txt
+ccmoyer_hwprog3/yfiblog.txt
+ccmoyer_hwprog3/SystemUNAME.txt
+ccmoyer_hwprog3/ydatalog.txt
+ccmoyer_hwprog3/main.cc
+ccmoyer_hwprog3/main.h
+ccmoyer_hwprog3/zlog5.txt
+ccmoyer_hwprog3/main.o
+ccmoyer_hwprog3/yfiblog.txt.bup
+ccmoyer_hwprog3/xout5.txt.bup
+ccmoyer_hwprog3/yfibout.txt.bup
+ccmoyer_hwprog3/ydatalog.txt.bup
+ccmoyer_hwprog3/yreadwritelog.txt.bup
+ccmoyer_hwprog3/scanline.o
+ccmoyer_hwprog3/main.h.bup
+ccmoyer_hwprog3/xlog6.txt
+ccmoyer_hwprog3/zushellcompare
+Remove the tar files
+Return from 'testdirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory$ ./zcCompileScript.txt 
+Descend into 'testdirectory' directory
+ 
+COMPILING ccmoyer_hwprog3
+g++ -O3 -Wall -std=c++11 -c main.cc
+g++ -O3 -Wall -std=c++11 -c dabnamespace.cc
+g++ -O3 -Wall -std=c++11 -c pullet16interpreter.cc
+[01m[Kpullet16interpreter.cc:[m[K In member function ‘[01m[Kvoid Interpreter::DumpProgram(std::ofstream&)[m[K’:
+[01m[Kpullet16interpreter.cc:81:21:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (int i = 0; i < memory_.size(); ++i) {
+[01;32m[K                     ^[m[K
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/scanner.cc
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/scanline.cc
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/utils.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o  dabnamespace.o pullet16interpreter.o  scanner.o scanline.o utils.o
+Return from 'testdirectory' directory
+ 
+COMPILING COMPLETE
+ 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory$ cd testdirectory/ccmoyer_hwprog3/
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3ccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3$ ./Aprog ../../adotout5.txt zlo[K[Kout5.txt zlog5.txt
+UTILS: open the logfile 'zlog5.txt'
+UTILS: open succeeded for 'zlog5.txt'
+UTILS: open the input file '../../adotout5.txt'
+UTILS: open succeeded for '../../adotout5.txt'
+UTILS: open the output file 'zout5.txt'
+UTILS: open succeeded for 'zout5.txt'
+Printing Vector
+1110000000000001
+1110000000000011
+0100000000001100
+1010000000001101
+1000000000001100
+1110000000000011
+0000000000000100
+1010000000001110
+1110000000000011
+1010000000001111
+0110000000010000
+1110000000000010
+1111000000000000
+1111111111011111
+0000000000000000
+0011110000111100
+0101011001010110
+UTILS: close the input file
+UTILS: the input file was closed
+UTILS: close the output file
+UTILS: the output file was closed
+UTILS: close the output file
+UTILS: the output file was closed
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3ccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3$ cat zout5.txt 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3ccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3$ cat zlog5.txt 
+Main: Beginning execution
+Main: infile  '../../adotout5.txt'
+Main: outfile 'zout5.txt'
+Main: Ending execution
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3ccmoyer@cocsce-l1d39-13:~/csce240/hwprog3testdirectory/testdirectory/ccmoyer_hwprog3$ exit
+exit
+
+Script done on Sun 30 Sep 2018 10:42:06 PM EDT

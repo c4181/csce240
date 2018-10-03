@@ -1,0 +1,156 @@
+Script started on Mon 03 Sep 2018 01:13:11 AM EDT
+groups: cannot find name for group ID 1816189668
+groups: cannot find name for group ID 1816195405
+groups: cannot find name for group ID 1816388100
+groups: cannot find name for group ID 1816431626
+groups: cannot find name for group ID 1816559825
+groups: cannot find name for group ID 1816605548
+groups: cannot find name for group ID 1816605572
+groups: cannot find name for group ID 1816608406
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog1testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog1testdirectory$ za[K[K./zaZipUpScript 
+Remove the old 'assignment' directory
+Create a new 'assignment' directory
+Descend into 'mydirectory' directory
+Descend into directory aardvarkanthony_hw1
+Execute 'uname' to verify system
+Return from directory aardvarkanthony_hw1
+tar directory aardvarkanthony_hw1
+aardvarkanthony_hw1/
+aardvarkanthony_hw1/SystemUNAME.txt
+aardvarkanthony_hw1/main.cc
+gzip directory aardvarkanthony_hw1
+cp gzipped file to 'assignment'
+rm the gzipped file from  aardvarkanthony_hw1
+Descend into directory buellduncan_hw1
+Execute 'uname' to verify system
+Return from directory buellduncan_hw1
+tar directory buellduncan_hw1
+buellduncan_hw1/
+buellduncan_hw1/SystemUNAME.txt
+buellduncan_hw1/main.cc
+gzip directory buellduncan_hw1
+cp gzipped file to 'assignment'
+rm the gzipped file from  buellduncan_hw1
+Descend into directory ccmoyer_hw1
+Execute 'uname' to verify system
+Return from directory ccmoyer_hw1
+tar directory ccmoyer_hw1
+ccmoyer_hw1/
+ccmoyer_hw1/makefile
+ccmoyer_hw1/SystemUNAME.txt
+ccmoyer_hw1/main.cc
+ccmoyer_hw1/main.o
+gzip directory ccmoyer_hw1
+cp gzipped file to 'assignment'
+rm the gzipped file from  ccmoyer_hw1
+Descend into directory hackerjrandom_hw1
+Execute 'uname' to verify system
+Return from directory hackerjrandom_hw1
+tar directory hackerjrandom_hw1
+hackerjrandom_hw1/
+hackerjrandom_hw1/SystemUNAME.txt
+hackerjrandom_hw1/main.cc
+gzip directory hackerjrandom_hw1
+cp gzipped file to 'assignment'
+rm the gzipped file from  hackerjrandom_hw1
+Descend into directory zyzzyvaszachary_hw1
+Execute 'uname' to verify system
+Return from directory zyzzyvaszachary_hw1
+tar directory zyzzyvaszachary_hw1
+zyzzyvaszachary_hw1/
+zyzzyvaszachary_hw1/SystemUNAME.txt
+zyzzyvaszachary_hw1/main.cc
+gzip directory zyzzyvaszachary_hw1
+cp gzipped file to 'assignment'
+rm the gzipped file from  zyzzyvaszachary_hw1
+Return from 'mydirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog1testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog1testdirectory$ ./zbFileCopyScript 
+Remove the old 'testdirectory' directory
+Create a new 'testdirectory' directory
+cp all the submissions from 'assignment' into 'testdirectory'
+Descend into 'testdirectory' directory
+untar directory tarfileaardvarkanthony_hw1
+aardvarkanthony_hw1/
+aardvarkanthony_hw1/SystemUNAME.txt
+aardvarkanthony_hw1/main.cc
+untar directory tarfilebuellduncan_hw1
+buellduncan_hw1/
+buellduncan_hw1/SystemUNAME.txt
+buellduncan_hw1/main.cc
+untar directory tarfileccmoyer_hw1
+ccmoyer_hw1/
+ccmoyer_hw1/makefile
+ccmoyer_hw1/SystemUNAME.txt
+ccmoyer_hw1/main.cc
+ccmoyer_hw1/main.o
+untar directory tarfilehackerjrandom_hw1
+hackerjrandom_hw1/
+hackerjrandom_hw1/SystemUNAME.txt
+hackerjrandom_hw1/main.cc
+untar directory tarfilezyzzyvaszachary_hw1
+zyzzyvaszachary_hw1/
+zyzzyvaszachary_hw1/SystemUNAME.txt
+zyzzyvaszachary_hw1/main.cc
+Remove the tar files
+Return from 'testdirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog1testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog1testdirectory$ ./zcCompileScript 
+Descend into 'testdirectory' directory
+ 
+COMPILING aardvarkanthony_hw1
+rm: cannot remove '*.o': No such file or directory
+rm: cannot remove 'Aprog': No such file or directory
+g++ -O3 -Wall -std=c++11 -o main.o -c main.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o
+ 
+COMPILING buellduncan_hw1
+rm: cannot remove '*.o': No such file or directory
+rm: cannot remove 'Aprog': No such file or directory
+g++ -O3 -Wall -std=c++11 -o main.o -c main.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o
+ 
+COMPILING ccmoyer_hw1
+rm: cannot remove 'Aprog': No such file or directory
+g++ -O3 -Wall -std=c++11 -o main.o -c main.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o
+ 
+COMPILING hackerjrandom_hw1
+rm: cannot remove '*.o': No such file or directory
+rm: cannot remove 'Aprog': No such file or directory
+g++ -O3 -Wall -std=c++11 -o main.o -c main.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o
+ 
+COMPILING zyzzyvaszachary_hw1
+rm: cannot remove '*.o': No such file or directory
+rm: cannot remove 'Aprog': No such file or directory
+g++ -O3 -Wall -std=c++11 -o main.o -c main.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o
+Return from 'testdirectory' directory
+ 
+COMPILING COMPLETE
+ 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog1testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog1testdirectory$ ./zdExecuteScript 
+Descend into 'testdirectory' directory
+ 
+EXECUTING aardvarkanthony_hw1
+EXECUTION COMPLETE
+ 
+EXECUTING buellduncan_hw1
+EXECUTION COMPLETE
+ 
+EXECUTING ccmoyer_hw1
+EXECUTION COMPLETE
+ 
+EXECUTING hackerjrandom_hw1
+EXECUTION COMPLETE
+ 
+EXECUTING zyzzyvaszachary_hw1
+EXECUTION COMPLETE
+Return from 'testdirectory' directory
+ 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog1testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog1testdirectory$ cd testdirectory/ccmoyer_hw1/[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kcat testdirectory/ccmoyer_hw1/zoutput1 
+Hello, world.
+My name is Christopher Moyer.
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog1testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog1testdirectory$ exit
+exit
+
+Script done on Mon 03 Sep 2018 01:14:50 AM EDT
