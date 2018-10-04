@@ -21,6 +21,7 @@
  * Constructor
 **/
 Interpreter::Interpreter() {
+  Init();
 }
 
 /***************************************************************************
@@ -37,6 +38,18 @@ Interpreter::~Interpreter() {
  * General functions.
 **/
 
+  void Interpreter::Init() {
+    code_to_mnemonic_.insert(pair<string, string>("000", "BAN"));
+    code_to_mnemonic_.insert(pair<string, string>("001", "SUB"));
+    code_to_mnemonic_.insert(pair<string, string>("010", "STC"));
+    code_to_mnemonic_.insert(pair<string, string>("011", "AND"));
+    code_to_mnemonic_.insert(pair<string, string>("100", "ADD"));
+    code_to_mnemonic_.insert(pair<string, string>("101", "LD"));
+    code_to_mnemonic_.insert(pair<string, string>("110", "BR"));
+    code_to_mnemonic_.insert(pair<string, string>("1110000000000001", "RD"));
+    code_to_mnemonic_.insert(pair<string, string>("1110000000000010", "STP"));
+    code_to_mnemonic_.insert(pair<string, string>("1110000000000011", "WRT"));
+  }
 /******************************************************************************
  * Function 'Decode'.
  * This top level function decodes the ASCII of the machine code into an

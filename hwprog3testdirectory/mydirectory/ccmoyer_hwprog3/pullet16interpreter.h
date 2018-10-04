@@ -13,12 +13,14 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <utility>
 #include <vector>
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::ofstream;
+using std::pair;
 using std::string;
 using std::vector;
 
