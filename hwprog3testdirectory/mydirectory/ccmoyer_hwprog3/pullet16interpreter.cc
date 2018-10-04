@@ -105,6 +105,10 @@ void Interpreter::DumpProgram(ofstream& out_stream) {
     out_stream  << memory_.at(i) << endl;
 }
 
+  for (int i=0; i < memory_.size(); ++i) {
+    out_stream << Decode(memory_.at(i));
+  }
+
 #ifdef EBUG
   Utils::log_stream << "leave DumpProgram" << endl;
 #endif
