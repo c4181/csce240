@@ -50,6 +50,7 @@ Interpreter::~Interpreter() {
     code_to_mnemonic_.insert(pair<string, string>("1110000000000010", "STP"));
     code_to_mnemonic_.insert(pair<string, string>("1110000000000011", "WRT"));
   }
+
 /******************************************************************************
  * Function 'Decode'.
  * This top level function decodes the ASCII of the machine code into an
@@ -68,14 +69,24 @@ string Interpreter::Decode(string the_ascii) {
   Utils::log_stream << "enter Decode" << endl;
 #endif
 
-  string returnvalue = "placeHolder";
-  returnvalue = "place_holder";
+  map<string, string>::iterator returnvalue;
+  string substring = the_ascii.substr(0, 2);
+
+  if (substring != "111") {
+    if (code_to_mnemonic_.count(substring) != 0) {
+      returnvalue = code_to_mnemonic_.find(substring);
+    } else {
+      Utils::log_stream << "Key to " << the_ascii << " not found";
+    }
+  } else {
+    returnvalue = code_to_mnemonic_.find(the_ascii);
+  }
 
 #ifdef EBUG
   Utils::log_stream << "leave Decode" << endl;
 #endif
 
-  return returnvalue;
+  return returnvalue -> second;
 }
 
 /******************************************************************************
