@@ -69,24 +69,27 @@ string Interpreter::Decode(string the_ascii) {
   Utils::log_stream << "enter Decode" << endl;
 #endif
 
-  map<string, string>::iterator returnvalue;
-  string substring = the_ascii.substr(0, 2);
+  map<string, string>::iterator mnemonic;
+  string returnvalue = "dummy string";
+  string substring = the_ascii.substr(0, 3);
 
   if (substring != "111") {
-    if (code_to_mnemonic_.count(substring) != 0) {
-      returnvalue = code_to_mnemonic_.find(substring);
+    if (code_to_mnemonic_.find(substring) != code_to_mnemonic_.end()) {
+      mnemonic = code_to_mnemonic_.find(substring);
+      returnvalue = mnemonic -> second;
     } else {
-      Utils::log_stream << "Key to " << the_ascii << " not found";
+      returnvalue = "XXX";
     }
   } else {
-    returnvalue = code_to_mnemonic_.find(the_ascii);
+    mnemonic = code_to_mnemonic_.find(the_ascii);
+    returnvalue = mnemonic -> second;
   }
 
 #ifdef EBUG
   Utils::log_stream << "leave Decode" << endl;
 #endif
 
-  return returnvalue -> second;
+  return returnvalue;
 }
 
 /******************************************************************************
@@ -106,7 +109,7 @@ void Interpreter::DumpProgram(ofstream& out_stream) {
 }
 
   for (int i=0; i < memory_.size(); ++i) {
-    out_stream << Decode(memory_.at(i));
+    out_stream << Decode(memory_.at(i)) << endl;
   }
 
 #ifdef EBUG
