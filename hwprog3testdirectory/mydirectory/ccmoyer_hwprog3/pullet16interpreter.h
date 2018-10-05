@@ -37,6 +37,7 @@ class Interpreter {
   virtual ~Interpreter();
 
   void DumpProgram(ofstream& out_stream);
+  void PrintProgram(ofstream& out_stream);
   void ReadProgram(Scanner& infile_scanner);
 
  private:
@@ -50,6 +51,7 @@ class Interpreter {
   map<string, string> mnemonic_to_code_;
 
   string Decode(string the_ascii);
+  string DecodeAddress(string the_ascii);
   void Init();
 };
 #endif

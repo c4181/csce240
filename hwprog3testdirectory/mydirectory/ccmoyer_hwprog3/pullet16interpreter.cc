@@ -71,11 +71,12 @@ string Interpreter::Decode(string the_ascii) {
 
   map<string, string>::iterator mnemonic;
   string returnvalue = "dummy string";
-  string substring = the_ascii.substr(0, 3);
+  string opcode = the_ascii.substr(0, 3);
+  string address_type = the_ascii.substr(3, 1);
 
-  if (substring != "111") {
-    if (code_to_mnemonic_.find(substring) != code_to_mnemonic_.end()) {
-      mnemonic = code_to_mnemonic_.find(substring);
+  if (opcode != "111") {
+    if (code_to_mnemonic_.find(opcode) != code_to_mnemonic_.end()) {
+      mnemonic = code_to_mnemonic_.find(opcode);
       returnvalue = mnemonic -> second;
     } else {
       returnvalue = "XXX";
@@ -120,6 +121,52 @@ void Interpreter::DumpProgram(ofstream& out_stream) {
 }
 
 /******************************************************************************
+ * Function 'DecodeAddress'.
+ * This function decodes whether it is indirect/direct addressing and prints the address.
+ *
+  * Parameters:
+ *   the_ascii - the ASCII to decode
+ *
+ * Returns:
+ *   a string of indirect/direct addressing and the address
+**/
+string Interpreter::DecodeAddress(string the_ascii) {
+#ifdef EBUG
+  Utils::log_stream << "enter DecodeAddress" << endl;
+#endif
+
+  string returnvalue = "dummy string";
+  string opcode = the_ascii.substr(0, 3);
+  string address_type = the_ascii.substr(3, 1);
+
+ if (opcode != "111") {
+    if (address_type == "1") {
+      returnvalue = "*";
+      returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+    } else {
+      returnvalue = " ";
+      returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+    }
+  } else if (code_to_mnemonic_.find(the_ascii) != code_to_mnemonic_.end()) {
+      if (address_type == "1") {
+        returnvalue = "*";
+        returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+      } else {
+        returnvalue = " ";
+        returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+      }
+    } else {
+    returnvalue = "X";
+    returnvalue += " XXXXXXXXXXXX"; 
+  }
+
+  return returnvalue;
+
+#ifdef EBUG
+  Utils::log_stream << "leave DecodeAddress" << endl;
+#endif
+}
+/******************************************************************************
  * Function 'ReadProgram'.
  * This top level function reads the ASCII of the machine code into memory.
  *
@@ -143,6 +190,37 @@ void Interpreter::ReadProgram(Scanner& in_scanner) {
 #endif
 }
 
+/******************************************************************************
+ * Function 'PrintProgram'.
+ * Prints out a formatted version of the program with the memory location,
+ * opcode, mnemonic on the opcode, type of addressing, and memory address.
+ *
+ * Parameters:
+ *   out_stream - the scanner to read for source code
+**/
+void Interpreter::PrintProgram(ofstream& out_stream) {
+#ifdef EBUG
+  Utils::log_stream << "enter PrintProgram" << endl;
+#endif
+
+  for (int i = 0; i < memory_.size(); ++i) {
+    string s = "";
+    string deocded_ascii = Decode(memory_.at(i));
+    string address = DecodeAddress(memory_.at(i));
+    s = Utils::Format("MEMORY", 6);
+    s += Utils::Format(i, 7);
+    s += Utils::Format(memory_.at(0), 18);
+    s += Utils::Format("CODE", 5);
+    s += Utils::Format(" " + deocded_ascii, 5, "left");
+    s += Utils::Format(address, 16);
+   out_stream << s << endl;
+  }
+
+#ifdef EBUG
+  Utils::log_stream << "leave PrintProgram" << endl;
+#endif
+
+}
 /******************************************************************************
  * Function 'ToString'.
  *
