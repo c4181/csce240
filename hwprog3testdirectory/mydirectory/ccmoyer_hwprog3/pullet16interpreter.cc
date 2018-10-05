@@ -139,7 +139,7 @@ string Interpreter::DecodeAddress(string the_ascii) {
   string opcode = the_ascii.substr(0, 3);
   string address_type = the_ascii.substr(3, 1);
 
- if (opcode != "111") {
+  if (opcode != "111") {
     if (address_type == "1") {
       returnvalue = "*";
       returnvalue += " " + the_ascii.substr(4, the_ascii.length());
@@ -157,7 +157,7 @@ string Interpreter::DecodeAddress(string the_ascii) {
       }
     } else {
     returnvalue = "X";
-    returnvalue += " XXXXXXXXXXXX"; 
+    returnvalue += " XXXXXXXXXXXX";
   }
 
   return returnvalue;
@@ -241,7 +241,6 @@ void Interpreter::PrintProgram(ofstream& out_stream) {
 #ifdef EBUG
   Utils::log_stream << "leave PrintProgram" << endl;
 #endif
-
 }
 /******************************************************************************
  * Function 'ToString'.
