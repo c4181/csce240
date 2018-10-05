@@ -80,9 +80,11 @@ string Interpreter::Decode(string the_ascii) {
     } else {
       returnvalue = "XXX";
     }
-  } else {
+  } else if (code_to_mnemonic_.find(the_ascii) != code_to_mnemonic_.end()) {
     mnemonic = code_to_mnemonic_.find(the_ascii);
     returnvalue = mnemonic -> second;
+  } else {
+    returnvalue = "XXX";
   }
 
 #ifdef EBUG
