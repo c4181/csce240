@@ -167,6 +167,25 @@ string Interpreter::DecodeAddress(string the_ascii) {
 #endif
 }
 /******************************************************************************
+ * Function 'GetDecimalAddress.
+ * Takes the bit string address and returns the deciaml address.
+ *
+ * Parameters:
+ *   the ascii - opcode to be conveted
+**/
+int Interpreter::GetDecimalAddress(string the_ascii) {
+#ifdef EBUG
+  Utils::log_stream << "enter GetDecimalAddress" << endl;
+#endif
+
+  const string address = the_ascii.substr(4, the_ascii.length());
+  return DABnamespace::BitStringToDec(address);
+
+#ifdef EBUG
+  Utils::log_stream << "leave GetDecimalAddress" << endl;
+#endif
+}
+/******************************************************************************
  * Function 'ReadProgram'.
  * This top level function reads the ASCII of the machine code into memory.
  *
@@ -207,13 +226,16 @@ void Interpreter::PrintProgram(ofstream& out_stream) {
     string s = "";
     string deocded_ascii = Decode(memory_.at(i));
     string address = DecodeAddress(memory_.at(i));
+    int decimal_address = GetDecimalAddress(memory_.at(i));
+
     s = Utils::Format("MEMORY", 6);
     s += Utils::Format(i, 7);
     s += Utils::Format(memory_.at(0), 18);
     s += Utils::Format("CODE", 5);
     s += Utils::Format(" " + deocded_ascii, 5, "left");
     s += Utils::Format(address, 16);
-   out_stream << s << endl;
+    s += Utils::Format(decimal_address, 4);
+    out_stream << s << endl;
   }
 
 #ifdef EBUG

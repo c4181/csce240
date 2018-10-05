@@ -52,6 +52,7 @@ class Interpreter {
 
   string Decode(string the_ascii);
   string DecodeAddress(string the_ascii);
+  int GetDecimalAddress(string the_ascii);
   void Init();
 };
 #endif
