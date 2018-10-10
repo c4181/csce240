@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 
   // Read, dump, close.
   interpreter.ReadProgram(in_scanner);
-  interpreter.PrintProgram(out_stream);
+  interpreter.DumpProgram(out_stream);
   in_scanner.Close();
 
   // Close up and go home.
