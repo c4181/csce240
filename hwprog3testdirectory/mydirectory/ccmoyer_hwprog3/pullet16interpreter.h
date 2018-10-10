@@ -11,14 +11,17 @@
 
 #include <cstdio>
 #include <iostream>
+#include <iterator>
 #include <map>
 #include <string>
+#include <utility>
 #include <vector>
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::ofstream;
+using std::pair;
 using std::string;
 using std::vector;
 
@@ -34,6 +37,7 @@ class Interpreter {
   virtual ~Interpreter();
 
   void DumpProgram(ofstream& out_stream);
+  void PrintProgram(ofstream& out_stream);
   void ReadProgram(Scanner& infile_scanner);
 
  private:
@@ -47,6 +51,8 @@ class Interpreter {
   map<string, string> mnemonic_to_code_;
 
   string Decode(string the_ascii);
+  string DecodeAddress(string the_ascii);
+  int GetDecimalAddress(string the_ascii);
   void Init();
 };
 #endif

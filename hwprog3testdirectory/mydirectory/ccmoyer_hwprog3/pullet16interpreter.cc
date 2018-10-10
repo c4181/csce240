@@ -21,6 +21,7 @@
  * Constructor
 **/
 Interpreter::Interpreter() {
+  Init();
 }
 
 /***************************************************************************
@@ -36,6 +37,19 @@ Interpreter::~Interpreter() {
 /***************************************************************************
  * General functions.
 **/
+
+  void Interpreter::Init() {
+    code_to_mnemonic_.insert(pair<string, string>("000", "BAN"));
+    code_to_mnemonic_.insert(pair<string, string>("001", "SUB"));
+    code_to_mnemonic_.insert(pair<string, string>("010", "STC"));
+    code_to_mnemonic_.insert(pair<string, string>("011", "AND"));
+    code_to_mnemonic_.insert(pair<string, string>("100", "ADD"));
+    code_to_mnemonic_.insert(pair<string, string>("101", "LD"));
+    code_to_mnemonic_.insert(pair<string, string>("110", "BR"));
+    code_to_mnemonic_.insert(pair<string, string>("1110000000000001", "RD"));
+    code_to_mnemonic_.insert(pair<string, string>("1110000000000010", "STP"));
+    code_to_mnemonic_.insert(pair<string, string>("1110000000000011", "WRT"));
+  }
 
 /******************************************************************************
  * Function 'Decode'.
@@ -55,8 +69,24 @@ string Interpreter::Decode(string the_ascii) {
   Utils::log_stream << "enter Decode" << endl;
 #endif
 
-  string returnvalue = "placeHolder";
-  returnvalue = "place_holder";
+  map<string, string>::iterator mnemonic;
+  string returnvalue = "dummy string";
+  string opcode = the_ascii.substr(0, 3);
+  string address_type = the_ascii.substr(3, 1);
+
+  if (opcode != "111") {
+    if (code_to_mnemonic_.find(opcode) != code_to_mnemonic_.end()) {
+      mnemonic = code_to_mnemonic_.find(opcode);
+      returnvalue = mnemonic -> second;
+    } else {
+      returnvalue = "XXX";
+    }
+  } else if (code_to_mnemonic_.find(the_ascii) != code_to_mnemonic_.end()) {
+    mnemonic = code_to_mnemonic_.find(the_ascii);
+    returnvalue = mnemonic -> second;
+  } else {
+    returnvalue = "XXX";
+  }
 
 #ifdef EBUG
   Utils::log_stream << "leave Decode" << endl;
@@ -81,11 +111,80 @@ void Interpreter::DumpProgram(ofstream& out_stream) {
     out_stream  << memory_.at(i) << endl;
 }
 
+  for (int i=0; i < memory_.size(); ++i) {
+    out_stream << Decode(memory_.at(i)) << endl;
+  }
+
 #ifdef EBUG
   Utils::log_stream << "leave DumpProgram" << endl;
 #endif
 }
 
+/******************************************************************************
+ * Function 'DecodeAddress'.
+ * This function decodes whether it is indirect/direct addressing and prints the address.
+ *
+  * Parameters:
+ *   the_ascii - the ASCII to decode
+ *
+ * Returns:
+ *   a string of indirect/direct addressing and the address
+**/
+string Interpreter::DecodeAddress(string the_ascii) {
+#ifdef EBUG
+  Utils::log_stream << "enter DecodeAddress" << endl;
+#endif
+
+  string returnvalue = "dummy string";
+  string opcode = the_ascii.substr(0, 3);
+  string address_type = the_ascii.substr(3, 1);
+
+  if (opcode != "111") {
+    if (address_type == "1") {
+      returnvalue = "*";
+      returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+    } else {
+      returnvalue = " ";
+      returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+    }
+  } else if (code_to_mnemonic_.find(the_ascii) != code_to_mnemonic_.end()) {
+      if (address_type == "1") {
+        returnvalue = "*";
+        returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+      } else {
+        returnvalue = " ";
+        returnvalue += " " + the_ascii.substr(4, the_ascii.length());
+      }
+    } else {
+    returnvalue = "X";
+    returnvalue += " XXXXXXXXXXXX";
+  }
+
+  return returnvalue;
+
+#ifdef EBUG
+  Utils::log_stream << "leave DecodeAddress" << endl;
+#endif
+}
+/******************************************************************************
+ * Function 'GetDecimalAddress.
+ * Takes the bit string address and returns the deciaml address.
+ *
+ * Parameters:
+ *   the ascii - opcode to be conveted
+**/
+int Interpreter::GetDecimalAddress(string the_ascii) {
+#ifdef EBUG
+  Utils::log_stream << "enter GetDecimalAddress" << endl;
+#endif
+
+  const string address = the_ascii.substr(4, the_ascii.length());
+  return DABnamespace::BitStringToDec(address);
+
+#ifdef EBUG
+  Utils::log_stream << "leave GetDecimalAddress" << endl;
+#endif
+}
 /******************************************************************************
  * Function 'ReadProgram'.
  * This top level function reads the ASCII of the machine code into memory.
@@ -110,6 +209,39 @@ void Interpreter::ReadProgram(Scanner& in_scanner) {
 #endif
 }
 
+/******************************************************************************
+ * Function 'PrintProgram'.
+ * Prints out a formatted version of the program with the memory location,
+ * opcode, mnemonic on the opcode, type of addressing, and memory address.
+ *
+ * Parameters:
+ *   out_stream - the scanner to read for source code
+**/
+void Interpreter::PrintProgram(ofstream& out_stream) {
+#ifdef EBUG
+  Utils::log_stream << "enter PrintProgram" << endl;
+#endif
+
+  for (int i = 0; i < memory_.size(); ++i) {
+    string s = "";
+    string deocded_ascii = Decode(memory_.at(i));
+    string address = DecodeAddress(memory_.at(i));
+    int decimal_address = GetDecimalAddress(memory_.at(i));
+
+    s = Utils::Format("MEMORY", 6);
+    s += Utils::Format(i, 7);
+    s += Utils::Format(memory_.at(0), 18);
+    s += Utils::Format("CODE", 5);
+    s += Utils::Format(" " + deocded_ascii, 5, "left");
+    s += Utils::Format(address, 16);
+    s += Utils::Format(decimal_address, 4);
+    out_stream << s << endl;
+  }
+
+#ifdef EBUG
+  Utils::log_stream << "leave PrintProgram" << endl;
+#endif
+}
 /******************************************************************************
  * Function 'ToString'.
  *
