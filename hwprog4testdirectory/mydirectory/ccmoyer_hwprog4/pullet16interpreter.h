@@ -11,12 +11,14 @@
 
 #include <cstdio>
 #include <iostream>
+#include <map>
 #include <string>
 #include <vector>
 
 using std::cin;
 using std::cout;
 using std::endl;
+using std::map;
 using std::ofstream;
 using std::string;
 using std::vector;
@@ -56,7 +58,7 @@ class Interpreter {
                                             {"100", "ADD"},
                                             {"101", "LD "},
                                             {"110", "BR "},
-                                            {"111", "EEE"}  // STP, RD, WRT 
+                                            {"111", "EEE"}  // STP, RD, WRT
                                           };
   map<string, string> mnemonic_to_code_ = { {"BAN", "000"},
                                             {"SUB", "001"},

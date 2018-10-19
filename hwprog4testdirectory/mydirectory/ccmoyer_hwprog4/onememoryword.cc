@@ -80,7 +80,6 @@ void OneMemoryWord::SetBitPattern(string what) {
  * Function 'Initialize'.
 **/
 void OneMemoryWord::Initialize(string bit_pattern) {
-
   bit_pattern_ = bit_pattern;
 }
 
