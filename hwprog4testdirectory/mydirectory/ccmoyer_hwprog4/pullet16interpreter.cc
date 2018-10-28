@@ -159,6 +159,11 @@ void Interpreter::DoRD(Scanner& data_scanner) {
 #endif
   Utils::log_stream << "OPCODE " << "RD  " << endl;
 
+if(data_scanner.HasNext()) {
+  string next_line = data_scanner.NextLine();
+  Hex the_hex (next_line);
+  accum_ = the_hex.GetValue();
+}
 #ifdef EBUG
   Utils::log_stream << "leave DoRD" << endl;
 #endif
@@ -201,6 +206,8 @@ void Interpreter::DoSTP() {
 #endif
   Utils::log_stream << "OPCODE " << "STP " << endl;
 
+  pc_ = kPCForStop;
+
 #ifdef EBUG
   Utils::log_stream << "leave DoSTP" << endl;
 #endif
@@ -237,6 +244,8 @@ void Interpreter::DoWRT(ofstream& out_stream) {
   Utils::log_stream << "enter DoWRT" << endl;
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE             " << "WRT" << endl;
+
+  out_stream << accum_ << endl;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoWRT" << endl;
@@ -281,6 +290,29 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   Utils::log_stream << "enter Execute" << endl;
 #endif
 
+  if(this_word.GetMnemonicBits() == "000") {
+    //TODO
+  } else if (this_word.GetMnemonicBits() == "001") {
+    //SUB
+  } else if (this_word.GetMnemonicBits() == "010") {
+    //STC
+  } else if (this_word.GetMnemonicBits() == "011") {
+    //AND
+  } else if (this_word.GetMnemonicBits() == "100") {
+    //ADD
+  } else if (this_word.GetMnemonicBits() == "101") {
+    //LD
+  } else if (this_word.GetMnemonicBits() == "110") {
+    //BR
+  } else if (this_word.GetMnemonicBits() == "111") {
+    if(this_word.GetLastThree() == "001") {
+      DoRD(data_scanner);
+    } else if (this_word.GetLastThree() == "010") {
+      DoSTP();
+    } else if (this_word.GetLastThree() == "011") {
+      DoWRT(out_stream);
+    }
+  }
 #ifdef EBUG
   Utils::log_stream << "leave Execute" << endl << endl;
 #endif
@@ -352,6 +384,11 @@ void Interpreter::Interpret(Scanner& data_scanner, ofstream& out_stream) {
   Utils::log_stream << "enter Interpret" << endl;
 #endif
 
+  pc_ = 0;
+  while (pc_ < 4096) {
+    Execute(memory_.at(pc_), data_scanner, out_stream);
+    pc_++;
+  }
 #ifdef EBUG
   Utils::log_stream << "leave Interpret" << endl;
 #endif

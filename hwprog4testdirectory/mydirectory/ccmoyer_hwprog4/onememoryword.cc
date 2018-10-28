@@ -59,6 +59,13 @@ string OneMemoryWord::GetIndirectFlag() const {
 }
 
 /***************************************************************************
+ * Accessor for the 'last 3 of opcode'.
+**/
+string OneMemoryWord::GetLastThree() const {
+  return bit_pattern_.substr(13, 3);
+}
+
+/***************************************************************************
  * Accessor for the 'mnemonic_bits_'.
 **/
 string OneMemoryWord::GetMnemonicBits() const {

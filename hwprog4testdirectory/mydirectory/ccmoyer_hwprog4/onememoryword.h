@@ -33,6 +33,7 @@ class OneMemoryWord {
   string GetAddressBits() const;
   string GetBitPattern() const;
   string GetIndirectFlag() const;
+  string GetLastThree() const;
   string GetMnemonicBits() const;
 
   void SetBitPattern(string what);
