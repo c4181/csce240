@@ -142,30 +142,8 @@ for (int i = 0; i < text_.length(); ++i) {
   }
 }
 
-int decimal = 0;
-int count = 0;
-/*
-for(string::reverse_iterator rit = text_.rbegin(); rit != text_.rend() - 1; ++rit) {
-  if (*rit == 'A') {
-    decimal += (10 * pow(16, count));
-  } else if (*rit == 'B') {
-    decimal += (11 * pow(16, count));
-  } else if (*rit == 'C') {
-    decimal += (12 * pow(16, count));
-  } else if (*rit == 'D') {
-    decimal += (13 * pow(16, count));
-  } else if (*rit == 'E') {
-    decimal += (14 * pow(16, count));
-  } else if (*rit == 'D') {
-    decimal += (15 * pow(16, count));
-  } else {
-    decimal += (*rit * pow(16, count));
-  }
-  ++count;
-}
-value_ = decimal;*/
 value_ = stoi(text_, nullptr, 16);
-//value_ = decimal;
+
 #ifdef EBUG
   Utils::log_stream << "leave ParseHexOperand" << endl;
 #endif
