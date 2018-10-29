@@ -107,6 +107,11 @@ void Interpreter::DoBAN(string addr, string target) {
   Utils::log_stream << "OPCODE ADDR TARGET " << "BAN " << addr << " "
                     << target << endl;
 
+  if(accum_ < 0) {
+    int location = GetTargetLocation("BR", addr, target);
+    pc_ = location - 1;
+  }
+
 #ifdef EBUG
   Utils::log_stream << "leave DoBAN" << endl;
 #endif
@@ -125,8 +130,7 @@ void Interpreter::DoBR(string addr, string target) {
   Utils::log_stream << "OPCODE ADDR TARGET " << "BR  " << addr << " "
                     << target << endl;
 
-  int location = GetTargetLocation("Branch on ACC negative", addr, target);
-
+  int location = GetTargetLocation("BR", addr, target);
   pc_ = location - 1;
 
 #ifdef EBUG
@@ -316,7 +320,7 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
 #endif
 
   if (this_word.GetMnemonicBits() == "000") {
-   
+   DoBAN(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "001") {
     DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "010") {
@@ -328,7 +332,7 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   } else if (this_word.GetMnemonicBits() == "101") {
     DoLD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "110") {
-    //BR
+    DoBR(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "111") {
     if (this_word.GetLastThree() == "001") {
       DoRD(data_scanner);
