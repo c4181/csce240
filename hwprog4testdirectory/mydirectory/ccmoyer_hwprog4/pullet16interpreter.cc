@@ -370,6 +370,9 @@ void Interpreter::FlagAddressOutOfBounds(int address) {
   Utils::log_stream << "enter FlagAddressOutOfBounds" << endl;
 #endif
 
+  if(address >= kMaxMemory) {
+    exit(1);
+  }
 #ifdef EBUG
   Utils::log_stream << "leave FlagAddressOutOfBounds" << endl;
 #endif
@@ -396,18 +399,12 @@ int Interpreter::GetTargetLocation(string label, string address,
   int location = DABnamespace::BitStringToDec(address);
 
   if (target == "0") {
-    if (location < kMaxMemory) {
-      return location;
-    } else {
-      exit(1);
-    }
+    FlagAddressOutOfBounds(location);
+    return location;
   } else {
     location = DABnamespace::BitStringToDec(memory_.at(location).GetAddressBits());
-    if (location < kMaxMemory) {
-      return location;
-    } else {
-      exit(1);
-    }
+    FlagAddressOutOfBounds(location);
+    return location;
   }
 
 #ifdef EBUG
