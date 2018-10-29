@@ -21,6 +21,7 @@ using std::endl;
 using std::map;
 using std::ofstream;
 using std::string;
+using std::to_string;
 using std::vector;
 
 #include "../../Utilities/scanner.h"

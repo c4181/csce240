@@ -385,21 +385,9 @@ int Interpreter::GetDecimal(string address) {
 #ifdef EBUG
   Utils::log_stream << "enter GetDecimal" << endl;
 #endif
-/*
-  int decimal = 0;
-
-  int power = address.length() - 1;
- 
- for(int i = 0; i < address.length(); ++i) {
-  int digit_at_i = address.at(i) - '0'; // Subtract 0 to remove ASCII value
-  decimal += (digit_at_i * pow(2, power));
-  --power;
- }
-*/
   
 int decimal = stoi(address, nullptr, 2);
 
-return decimal; 
 #ifdef EBUG
   Utils::log_stream << "leave GetDecimal" << endl;
 #endif
@@ -433,7 +421,7 @@ string Interpreter::GetBinary(int decimal) {
   vector<int>::reverse_iterator rit;
   string binary;
   for (rit = remainders.rbegin(); rit != remainders.rend(); ++rit) {
-    binary += *rit;
+    binary += to_string(*rit);
   }
 
   if(binary.length() != 16) {
