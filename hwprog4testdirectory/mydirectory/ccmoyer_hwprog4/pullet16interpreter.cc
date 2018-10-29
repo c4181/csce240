@@ -155,8 +155,8 @@ void Interpreter::DoLD(string addr, string target) {
 
   string data = memory_.at(location).GetBitPattern();
 
-  int int_data = GetDecimal(data);
-  accum_ = int_data;
+  int int_data = DABnamespace::BitStringToDec(data);
+  accum_ = TwosComplementInteger(int_data);
 
 #ifdef EBUG
   Utils::log_stream << "leave DoLD" << endl;
@@ -210,7 +210,7 @@ void Interpreter::DoSTC(string addr, string target) {
 
   int location = GetTargetLocation("STC", addr, target);
 
-  string binary = GetBinary(accum_);
+  string binary = DABnamespace::DecToBitString(accum_, 16);
 
   OneMemoryWord new_word (binary);
   memory_.at(location) = new_word;
@@ -334,6 +334,7 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
     DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "010") {
     DoSTC(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    //DumpProgram(out_stream);
   } else if (this_word.GetMnemonicBits() == "011") {
     //AND
   } else if (this_word.GetMnemonicBits() == "100") {
@@ -394,52 +395,6 @@ int decimal = stoi(address, nullptr, 2);
 
   return decimal;
 }
-
-/***************************************************************************
- * Function 'GetBinary'.
- * Takes in an adress in decimal and converts it to 16-bit binary
- *
- * Parameter:
- *   decimal - decimal to be converted to binary
-**/
-string Interpreter::GetBinary(int decimal) {
-#ifdef EBUG
-  Utils::log_stream << "enter GetBinary" << endl;
-#endif
-
-  vector<int> remainders;
-  int decimal_copy = decimal;
-  int remainder = -1;
-  string sixteen_bit_binary;
-
-  while(decimal_copy != 0) {
-    remainder = decimal_copy % 2;
-    remainders.push_back(remainder);
-    decimal_copy = decimal_copy / 2;
-  }
-
-  vector<int>::reverse_iterator rit;
-  string binary;
-  for (rit = remainders.rbegin(); rit != remainders.rend(); ++rit) {
-    binary += to_string(*rit);
-  }
-
-  if(binary.length() != 16) {
-    int number_of_zeros = 16 - binary.length();
-
-    string leading_zeros (number_of_zeros, '0');
-
-    sixteen_bit_binary = leading_zeros;
-    sixteen_bit_binary += binary;
-  }
-
-  return sixteen_bit_binary;
-
-#ifdef EBUG
-  Utils::log_stream << "leave GetBinary" << endl;
-#endif
-}
-
 
 /***************************************************************************
  * Function 'GetTargetLocation'.
@@ -507,7 +462,8 @@ void Interpreter::Interpret(Scanner& data_scanner, ofstream& out_stream) {
   pc_ = 0;
   while (pc_ < kMaxMemory) {
     Execute(memory_.at(pc_), data_scanner, out_stream);
-    out_stream << accum_ << endl; //TEST LINE
+    //out_stream << accum_ << endl; //TEST LINE
+    //cout << ToString() << endl;
     pc_++;
   }
 #ifdef EBUG
