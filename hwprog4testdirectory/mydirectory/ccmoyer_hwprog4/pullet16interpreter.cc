@@ -208,6 +208,15 @@ void Interpreter::DoSTC(string addr, string target) {
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "STC        "
                     << addr << " " << target << endl;
 
+  int location = GetTargetLocation("STC", addr, target);
+
+  string binary = GetBinary(accum_);
+
+  OneMemoryWord new_word (binary);
+  memory_.at(location) = new_word;
+
+  accum_ = 0;
+
 #ifdef EBUG
   Utils::log_stream << "leave DoSTC" << endl;
 #endif
@@ -324,7 +333,7 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   } else if (this_word.GetMnemonicBits() == "001") {
     DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "010") {
-    //STC
+    DoSTC(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "011") {
     //AND
   } else if (this_word.GetMnemonicBits() == "100") {
@@ -397,6 +406,52 @@ return decimal;
 
   return decimal;
 }
+
+/***************************************************************************
+ * Function 'GetBinary'.
+ * Takes in an adress in decimal and converts it to 16-bit binary
+ *
+ * Parameter:
+ *   decimal - decimal to be converted to binary
+**/
+string Interpreter::GetBinary(int decimal) {
+#ifdef EBUG
+  Utils::log_stream << "enter GetBinary" << endl;
+#endif
+
+  vector<int> remainders;
+  int decimal_copy = decimal;
+  int remainder = -1;
+  string sixteen_bit_binary;
+
+  while(decimal_copy != 0) {
+    remainder = decimal_copy % 2;
+    remainders.push_back(remainder);
+    decimal_copy = decimal_copy / 2;
+  }
+
+  vector<int>::reverse_iterator rit;
+  string binary;
+  for (rit = remainders.rbegin(); rit != remainders.rend(); ++rit) {
+    binary += *rit;
+  }
+
+  if(binary.length() != 16) {
+    int number_of_zeros = 16 - binary.length();
+
+    string leading_zeros (number_of_zeros, '0');
+
+    sixteen_bit_binary = leading_zeros;
+    sixteen_bit_binary += binary;
+  }
+
+  return sixteen_bit_binary;
+
+#ifdef EBUG
+  Utils::log_stream << "leave GetBinary" << endl;
+#endif
+}
+
 
 /***************************************************************************
  * Function 'GetTargetLocation'.

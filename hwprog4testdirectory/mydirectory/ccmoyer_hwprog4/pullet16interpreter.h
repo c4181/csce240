@@ -87,6 +87,7 @@ class Interpreter {
   void Execute(OneMemoryWord this_word,
                Scanner& data_scanner, ofstream& out_stream);
   void FlagAddressOutOfBounds(int address);
+  string GetBinary(int decimal);
   int GetDecimal(string address);
   int GetTargetLocation(string label, string address, string target);
   int TwosComplementInteger(int value);
