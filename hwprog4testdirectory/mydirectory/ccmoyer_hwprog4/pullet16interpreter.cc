@@ -66,7 +66,7 @@ void Interpreter::DoADD(string addr, string target) {
   int location = GetTargetLocation("ADD", addr, target);
   string data = memory_.at(location).GetBitPattern();
 
-  int int_data = GetDecimal(data);
+  int int_data = DABnamespace::BitStringToDec(data);
   accum_ = accum_ + int_data;
 
 #ifdef EBUG
@@ -256,7 +256,7 @@ void Interpreter::DoSUB(string addr, string target) {
   int location = GetTargetLocation("SUB", addr, target);
   string data = memory_.at(location).GetBitPattern();
 
-  int int_data = GetDecimal(data);
+  int int_data = DABnamespace::BitStringToDec(data);
   accum_ = accum_ - int_data;
 
 #ifdef EBUG
@@ -376,27 +376,6 @@ void Interpreter::FlagAddressOutOfBounds(int address) {
 }
 
 /***************************************************************************
- * Function 'GetDecimal'.
- * Takes in an adress in binary and converts it to decimal
- *
- * Parameter:
- *   address - adress to be converted to decimal
-**/
-int Interpreter::GetDecimal(string address) {
-#ifdef EBUG
-  Utils::log_stream << "enter GetDecimal" << endl;
-#endif
-  
-int decimal = stoi(address, nullptr, 2);
-
-#ifdef EBUG
-  Utils::log_stream << "leave GetDecimal" << endl;
-#endif
-
-  return decimal;
-}
-
-/***************************************************************************
  * Function 'GetTargetLocation'.
  * Get the target location, perhaps through indirect addressing.
  *
@@ -414,7 +393,7 @@ int Interpreter::GetTargetLocation(string label, string address,
   Utils::log_stream << "enter GetTargetLocation" << endl;
 #endif
 
-  int location = GetDecimal(address);
+  int location = DABnamespace::BitStringToDec(address);
 
   if (target == "0") {
     if (location < kMaxMemory) {
@@ -423,7 +402,7 @@ int Interpreter::GetTargetLocation(string label, string address,
       exit(1);
     }
   } else {
-    location = GetDecimal(memory_.at(location).GetAddressBits());
+    location = DABnamespace::BitStringToDec(memory_.at(location).GetAddressBits());
     if (location < kMaxMemory) {
       return location;
     } else {
