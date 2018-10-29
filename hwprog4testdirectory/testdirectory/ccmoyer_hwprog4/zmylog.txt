@@ -1,0 +1,25 @@
+MAIN: Beginning execution
+MAIN: adotoutfile   '../../adotoutreadwrite.txt'
+MAIN: datafile '../../zzin.txt'
+MAIN: outfile  'zmyout.txt'
+READ 1 1 1110000000000001
+READ 2 2 1110000000000011
+READ 3 3 1110000000000001
+READ 4 4 1110000000000011
+READ 5 5 1110000000000010
+
+********* ********* ********* ********* ********* ********* ********* ********* 
+MACHINE IS NOW
+PC           5
+ACCUM        0 0000000000000000
+
+MEM    0-   3 1110000000000001 1110000000000011 1110000000000001 1110000000000011
+MEM    4-   7 1110000000000010
+
+********* ********* ********* ********* ********* ********* ********* ********* 
+OPCODE RD  
+EXECUTE:    OPCODE             WRT
+OPCODE RD  
+EXECUTE:    OPCODE             WRT
+OPCODE STP 
+MAIN: Ending execution
