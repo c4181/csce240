@@ -42,6 +42,7 @@ class Interpreter {
 
  private:
   static const int kMaxInstrCount = 128;
+  static const int kMaxMemory = 4096;
   static const int kPCForStop = 65537;  // 16-bit overflow value
 
   int pc_;
@@ -86,6 +87,7 @@ class Interpreter {
   void Execute(OneMemoryWord this_word,
                Scanner& data_scanner, ofstream& out_stream);
   void FlagAddressOutOfBounds(int address);
+  int GetDecimal(string address);
   int GetTargetLocation(string label, string address, string target);
   int TwosComplementInteger(int value);
 };

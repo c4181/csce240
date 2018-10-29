@@ -119,6 +119,10 @@ void Interpreter::DoBR(string addr, string target) {
   Utils::log_stream << "OPCODE ADDR TARGET " << "BR  " << addr << " "
                     << target << endl;
 
+  int location = GetTargetLocation("Branch on ACC negative", addr, target);
+
+  pc_ = location - 1;
+
 #ifdef EBUG
   Utils::log_stream << "leave DoBR" << endl;
 #endif
@@ -136,6 +140,13 @@ void Interpreter::DoLD(string addr, string target) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "LD         "
                     << addr << " " << target << endl;
+
+  int location = GetTargetLocation("Load", addr, target);
+
+  string data = memory_.at(location).GetBitPattern();
+
+  int int_data = GetDecimal(data);
+  accum_ = int_data;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoLD" << endl;
@@ -161,7 +172,7 @@ void Interpreter::DoRD(Scanner& data_scanner) {
 
 if(data_scanner.HasNext()) {
   string next_line = data_scanner.NextLine();
-  Hex the_hex (next_line);
+  Hex the_hex(next_line);
   accum_ = the_hex.GetValue();
 }
 #ifdef EBUG
@@ -223,6 +234,11 @@ void Interpreter::DoSUB(string addr, string target) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "SUB        "
                     << addr << " " << target << endl;
+  int location = GetTargetLocation("SUB", addr, target);
+  string data = memory_.at(location).GetBitPattern();
+
+  int int_data = GetDecimal(data);
+  accum_ = accum_ - int_data;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoSUB" << endl;
@@ -245,7 +261,7 @@ void Interpreter::DoWRT(ofstream& out_stream) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE             " << "WRT" << endl;
 
-  out_stream << accum_ << endl;
+  out_stream << TwosComplementInteger(accum_) << endl;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoWRT" << endl;
@@ -279,6 +295,9 @@ void Interpreter::DumpProgram(ofstream& out_stream) {
  *
  * Execution is basically a switch statement based on the opcode value.
  *
+ * Branch statements decrease the pc_ by 1 causing the next cycle to be on
+ * the correct value
+ *
  * Parameters:
  *   this_word - the instance of 'OneMemoryWord' to be executed.
  *   data_scanner - the 'Scanner', needed for the 'RD' instruction
@@ -290,10 +309,10 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   Utils::log_stream << "enter Execute" << endl;
 #endif
 
-  if(this_word.GetMnemonicBits() == "000") {
-    //TODO
+  if (this_word.GetMnemonicBits() == "000") {
+   
   } else if (this_word.GetMnemonicBits() == "001") {
-    //SUB
+    DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "010") {
     //STC
   } else if (this_word.GetMnemonicBits() == "011") {
@@ -301,11 +320,11 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   } else if (this_word.GetMnemonicBits() == "100") {
     //ADD
   } else if (this_word.GetMnemonicBits() == "101") {
-    //LD
+    DoLD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "110") {
     //BR
   } else if (this_word.GetMnemonicBits() == "111") {
-    if(this_word.GetLastThree() == "001") {
+    if (this_word.GetLastThree() == "001") {
       DoRD(data_scanner);
     } else if (this_word.GetLastThree() == "010") {
       DoSTP();
@@ -337,6 +356,36 @@ void Interpreter::FlagAddressOutOfBounds(int address) {
 }
 
 /***************************************************************************
+ * Function 'GetDecimal'.
+ * Takes in an adress in binary and converts it to decimal
+ *
+ * Parameter:
+ *   address - adress to be converted to decimal
+**/
+int Interpreter::GetDecimal(string address) {
+#ifdef EBUG
+  Utils::log_stream << "enter GetDecimal" << endl;
+#endif
+
+  int decimal = 0;
+
+  int power = address.length() - 1;
+ 
+ for(int i = 0; i < address.length(); ++i) {
+  int digit_at_i = address.at(i) - '0'; // Subtract 0 to remove ASCII value
+  decimal += (digit_at_i * pow(2, power));
+  --power;
+ }
+
+ 
+#ifdef EBUG
+  Utils::log_stream << "leave GetDecimal" << endl;
+#endif
+
+  return decimal;
+}
+
+/***************************************************************************
  * Function 'GetTargetLocation'.
  * Get the target location, perhaps through indirect addressing.
  *
@@ -354,7 +403,22 @@ int Interpreter::GetTargetLocation(string label, string address,
   Utils::log_stream << "enter GetTargetLocation" << endl;
 #endif
 
-  int location = -1;
+  int location = GetDecimal(address);
+
+  if (target == "0") {
+    if (location < kMaxMemory) {
+      return location;
+    } else {
+      exit(1);
+    }
+  } else {
+    location = GetDecimal(memory_.at(location).GetAddressBits());
+    if (location < kMaxMemory) {
+      return location;
+    } else {
+      exit(1);
+    }
+  }
 
 #ifdef EBUG
   Utils::log_stream << "leave GetTargetLocation" << endl;
@@ -387,6 +451,7 @@ void Interpreter::Interpret(Scanner& data_scanner, ofstream& out_stream) {
   pc_ = 0;
   while (pc_ < 4096) {
     Execute(memory_.at(pc_), data_scanner, out_stream);
+    out_stream << accum_ << endl; //TEST LINE
     pc_++;
   }
 #ifdef EBUG
