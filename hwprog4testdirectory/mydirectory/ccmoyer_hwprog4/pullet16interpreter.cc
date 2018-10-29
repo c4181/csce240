@@ -88,6 +88,23 @@ void Interpreter::DoAND(string addr, string target) {
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "AND "
                     << addr << " " << target << endl;
 
+  string and_value;
+
+  int location = GetTargetLocation("AND", addr, target);
+  string data = memory_.at(location).GetBitPattern();
+
+  string bin_accum = DABnamespace::DecToBitString(accum_, 16);
+
+  for (int i = 0; i < data.length(); ++i) {
+    if (data.at(i) == '1' && bin_accum.at(i) == '1') {
+      and_value += "1";
+    } else {
+      and_value += "0";
+    }
+  }
+
+  accum_ = DABnamespace::BitStringToDec(and_value);
+
 #ifdef EBUG
   Utils::log_stream << "leave DoAND" << endl;
 #endif
@@ -314,6 +331,10 @@ void Interpreter::DumpProgram(ofstream& out_stream) {
  *
  * Execution is basically a switch statement based on the opcode value.
  *
+ * Before executing an instruction, this function to checks how many 
+ * instructions have been executed. This counter will crash the 
+ * program at 100.
+ *
  * Branch statements decrease the pc_ by 1 causing the next cycle to be on
  * the correct value
  *
@@ -328,15 +349,20 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   Utils::log_stream << "enter Execute" << endl;
 #endif
 
+  if(instructions_executed_ < 100) {
+    ++instructions_executed_;
+  } else {
+    exit(1);
+  }
+
   if (this_word.GetMnemonicBits() == "000") {
    DoBAN(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "001") {
     DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "010") {
     DoSTC(this_word.GetAddressBits(), this_word.GetIndirectFlag());
-    //DumpProgram(out_stream);
   } else if (this_word.GetMnemonicBits() == "011") {
-    //AND
+    DoAND(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "100") {
     DoADD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "101") {
