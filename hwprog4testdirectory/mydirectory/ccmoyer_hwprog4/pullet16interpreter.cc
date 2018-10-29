@@ -63,6 +63,12 @@ void Interpreter::DoADD(string addr, string target) {
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "ADD        "
                     << addr << " " << target << endl;
 
+  int location = GetTargetLocation("ADD", addr, target);
+  string data = memory_.at(location).GetBitPattern();
+
+  int int_data = GetDecimal(data);
+  accum_ = accum_ + int_data;
+
 #ifdef EBUG
   Utils::log_stream << "leave DoADD" << endl;
 #endif
@@ -318,7 +324,7 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   } else if (this_word.GetMnemonicBits() == "011") {
     //AND
   } else if (this_word.GetMnemonicBits() == "100") {
-    //ADD
+    DoADD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "101") {
     DoLD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "110") {
@@ -366,7 +372,7 @@ int Interpreter::GetDecimal(string address) {
 #ifdef EBUG
   Utils::log_stream << "enter GetDecimal" << endl;
 #endif
-
+/*
   int decimal = 0;
 
   int power = address.length() - 1;
@@ -376,8 +382,11 @@ int Interpreter::GetDecimal(string address) {
   decimal += (digit_at_i * pow(2, power));
   --power;
  }
+*/
+  
+int decimal = stoi(address, nullptr, 2);
 
- 
+return decimal; 
 #ifdef EBUG
   Utils::log_stream << "leave GetDecimal" << endl;
 #endif
@@ -449,7 +458,7 @@ void Interpreter::Interpret(Scanner& data_scanner, ofstream& out_stream) {
 #endif
 
   pc_ = 0;
-  while (pc_ < 4096) {
+  while (pc_ < kMaxMemory) {
     Execute(memory_.at(pc_), data_scanner, out_stream);
     out_stream << accum_ << endl; //TEST LINE
     pc_++;
