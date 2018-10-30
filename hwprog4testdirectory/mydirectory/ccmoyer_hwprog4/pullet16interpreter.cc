@@ -349,6 +349,7 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   Utils::log_stream << "enter Execute" << endl;
 #endif
 
+
   if(instructions_executed_ < 100) {
     ++instructions_executed_;
   } else {
