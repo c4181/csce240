@@ -124,7 +124,7 @@ void Interpreter::DoBAN(string addr, string target) {
   Utils::log_stream << "OPCODE ADDR TARGET " << "BAN " << addr << " "
                     << target << endl;
 
-  if(accum_ < 0) {
+  if (accum_ < 0) {
     int location = GetTargetLocation("BR", addr, target);
     pc_ = location - 1;
   }
@@ -229,7 +229,7 @@ void Interpreter::DoSTC(string addr, string target) {
 
   string binary = DABnamespace::DecToBitString(accum_, 16);
 
-  OneMemoryWord new_word (binary);
+  OneMemoryWord new_word(binary);
   memory_.at(location) = new_word;
 
   accum_ = 0;
@@ -350,33 +350,33 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
 #endif
 
 
-  if(instructions_executed_ < 100) {
+  if (instructions_executed_ < 100) {
     ++instructions_executed_;
   } else {
     exit(1);
   }
 
   if (this_word.GetMnemonicBits() == "000") {
-   DoBAN(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    DoBAN(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "001") {
-    DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+      DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "010") {
-    DoSTC(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+      DoSTC(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "011") {
-    DoAND(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+      DoAND(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "100") {
-    DoADD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+      DoADD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "101") {
-    DoLD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+      DoLD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "110") {
-    DoBR(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+      DoBR(this_word.GetAddressBits(), this_word.GetIndirectFlag());
   } else if (this_word.GetMnemonicBits() == "111") {
     if (this_word.GetLastThree() == "001") {
       DoRD(data_scanner);
     } else if (this_word.GetLastThree() == "010") {
-      DoSTP();
+        DoSTP();
     } else if (this_word.GetLastThree() == "011") {
-      DoWRT(out_stream);
+        DoWRT(out_stream);
     }
   }
 #ifdef EBUG
@@ -397,7 +397,7 @@ void Interpreter::FlagAddressOutOfBounds(int address) {
   Utils::log_stream << "enter FlagAddressOutOfBounds" << endl;
 #endif
 
-  if(address >= kMaxMemory) {
+  if (address >= kMaxMemory) {
     exit(1);
   }
 #ifdef EBUG
@@ -429,7 +429,8 @@ int Interpreter::GetTargetLocation(string label, string address,
     FlagAddressOutOfBounds(location);
     return location;
   } else {
-    location = DABnamespace::BitStringToDec(memory_.at(location).GetAddressBits());
+    location = DABnamespace::BitStringToDec(
+               memory_.at(location).GetAddressBits());
     FlagAddressOutOfBounds(location);
     return location;
   }
@@ -463,10 +464,10 @@ void Interpreter::Interpret(Scanner& data_scanner, ofstream& out_stream) {
 #endif
 
   pc_ = 0;
+  instructions_executed_ = 0;
+
   while (pc_ < kMaxMemory) {
     Execute(memory_.at(pc_), data_scanner, out_stream);
-    //out_stream << accum_ << endl; //TEST LINE
-    //cout << ToString() << endl;
     pc_++;
   }
 #ifdef EBUG

@@ -48,7 +48,7 @@ class Interpreter {
 
   int pc_;
   int accum_;
-  int instructions_executed_ = 0;
+  int instructions_executed_;
 
   string ToString();
 

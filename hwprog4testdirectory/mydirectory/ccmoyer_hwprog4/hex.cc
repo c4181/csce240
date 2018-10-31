@@ -137,7 +137,7 @@ if(text_.at(0) != '+' && text_.at(0) != '-') {
 
 for (int i = 0; i < text_.length(); ++i) {
   unordered_set<char>::const_iterator find = valid_hex_digits.find(text_.at(i));
-  if(find == valid_hex_digits.end()) {
+  if (find == valid_hex_digits.end()) {
     is_invalid_ == true;
   }
 }
