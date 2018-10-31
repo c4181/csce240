@@ -21,7 +21,6 @@ using std::endl;
 using std::map;
 using std::ofstream;
 using std::string;
-using std::to_string;
 using std::vector;
 
 #include "../../Utilities/scanner.h"
@@ -43,12 +42,10 @@ class Interpreter {
 
  private:
   static const int kMaxInstrCount = 128;
-  static const int kMaxMemory = 4096;
   static const int kPCForStop = 65537;  // 16-bit overflow value
 
   int pc_;
   int accum_;
-  int instructions_executed_;
 
   string ToString();
 

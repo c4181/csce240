@@ -49,8 +49,8 @@ Interpreter::~Interpreter() {
  * Function 'DoADD'.
  * This top level function interprets the 'ADD' opcode.
  *
- * Load the contents from the 'addr'.
- * Convert the 16-bit value to decimal.
+ * Load the contents from the 'target'.
+ * Convert the 16-bit value to its 2s complement version as a 32-bit value.
  * Add, storing the result in the accumulator.
  * Arithmetic overflow causes the top bits to be lost but is not flagged
  *   as an error.  It's just the way hardware works.
@@ -63,12 +63,6 @@ void Interpreter::DoADD(string addr, string target) {
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "ADD        "
                     << addr << " " << target << endl;
 
-  int location = GetTargetLocation("ADD", addr, target);
-  string data = memory_.at(location).GetBitPattern();
-
-  int int_data = DABnamespace::BitStringToDec(data);
-  accum_ = accum_ + int_data;
-
 #ifdef EBUG
   Utils::log_stream << "leave DoADD" << endl;
 #endif
@@ -78,7 +72,7 @@ void Interpreter::DoADD(string addr, string target) {
  * Function 'DoAND'.
  * This top level function interprets the 'AND' opcode.
  *
- * Load the contents from the 'addr', taking indirection into account.
+ * Load the contents from the 'target', taking indirection into account.
  * AND, storing the result in the accumulator.
 **/
 void Interpreter::DoAND(string addr, string target) {
@@ -87,23 +81,6 @@ void Interpreter::DoAND(string addr, string target) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "AND "
                     << addr << " " << target << endl;
-
-  string and_value;
-
-  int location = GetTargetLocation("AND", addr, target);
-  string data = memory_.at(location).GetBitPattern();
-
-  string bin_accum = DABnamespace::DecToBitString(accum_, 16);
-
-  for (int i = 0; i < data.length(); ++i) {
-    if (data.at(i) == '1' && bin_accum.at(i) == '1') {
-      and_value += "1";
-    } else {
-      and_value += "0";
-    }
-  }
-
-  accum_ = DABnamespace::BitStringToDec(and_value);
 
 #ifdef EBUG
   Utils::log_stream << "leave DoAND" << endl;
@@ -116,9 +93,6 @@ void Interpreter::DoAND(string addr, string target) {
  *
  * If the accumulator value is negative, branch to the target location.
  * Otherwise, just continue on continuing on.
- *
- * This function decreases the program counter by 1 after branching
- * to have the PC be on the correct number on the next cycle
 **/
 void Interpreter::DoBAN(string addr, string target) {
 #ifdef EBUG
@@ -126,11 +100,6 @@ void Interpreter::DoBAN(string addr, string target) {
 #endif
   Utils::log_stream << "OPCODE ADDR TARGET " << "BAN " << addr << " "
                     << target << endl;
-
-  if (accum_ < 0) {
-    int location = GetTargetLocation("BR", addr, target);
-    pc_ = location - 1;
-  }
 
 #ifdef EBUG
   Utils::log_stream << "leave DoBAN" << endl;
@@ -141,10 +110,7 @@ void Interpreter::DoBAN(string addr, string target) {
  * Function 'DoBR'.
  * This top level function interprets the 'BR' opcode.
  *
- * Branch unconditionally to the addr location.
- *
- * This function decreases the program counter by 1 after branching
- * to have the PC be on the correct number on the next cycle
+ * Branch unconditionally to the target location.
 **/
 void Interpreter::DoBR(string addr, string target) {
 #ifdef EBUG
@@ -152,9 +118,6 @@ void Interpreter::DoBR(string addr, string target) {
 #endif
   Utils::log_stream << "OPCODE ADDR TARGET " << "BR  " << addr << " "
                     << target << endl;
-
-  int location = GetTargetLocation("BR", addr, target);
-  pc_ = location - 1;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoBR" << endl;
@@ -165,7 +128,7 @@ void Interpreter::DoBR(string addr, string target) {
  * Function 'DoLD'.
  * This top level function interprets the 'LD' opcode.
  *
- * Load the accumulator with the contents of the addr location.
+ * Load the accumulator with the contents of the target location.
 **/
 void Interpreter::DoLD(string addr, string target) {
 #ifdef EBUG
@@ -173,13 +136,6 @@ void Interpreter::DoLD(string addr, string target) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "LD         "
                     << addr << " " << target << endl;
-
-  int location = GetTargetLocation("Load", addr, target);
-
-  string data = memory_.at(location).GetBitPattern();
-
-  int int_data = DABnamespace::BitStringToDec(data);
-  accum_ = TwosComplementInteger(int_data);
 
 #ifdef EBUG
   Utils::log_stream << "leave DoLD" << endl;
@@ -203,13 +159,10 @@ void Interpreter::DoRD(Scanner& data_scanner) {
 #endif
   Utils::log_stream << "OPCODE " << "RD  " << endl;
 
-if (data_scanner.HasNext()) {
+if(data_scanner.HasNext()) {
   string next_line = data_scanner.NextLine();
-  Hex the_hex(next_line);
+  Hex the_hex (next_line);
   accum_ = the_hex.GetValue();
-} else {
-  cout << "ERROR: READ PAST END OF FILE" << endl;
-  exit(1);
 }
 #ifdef EBUG
   Utils::log_stream << "leave DoRD" << endl;
@@ -220,7 +173,7 @@ if (data_scanner.HasNext()) {
  * Function 'DoSTC'.
  * This top level function interprets the 'STC' opcode.
  *
- * Get the addr location.
+ * Get the target location.
  * Store the accumulator at that location.
  * Zero the accumulator.
  *
@@ -233,15 +186,6 @@ void Interpreter::DoSTC(string addr, string target) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "STC        "
                     << addr << " " << target << endl;
-
-  int location = GetTargetLocation("STC", addr, target);
-
-  string binary = DABnamespace::DecToBitString(accum_, 16);
-
-  OneMemoryWord new_word(binary);
-  memory_.at(location) = new_word;
-
-  accum_ = 0;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoSTC" << endl;
@@ -272,10 +216,6 @@ void Interpreter::DoSTP() {
 /***************************************************************************
  * Function 'DoSUB'.
  * This top level function interprets the 'SUB' opcode.
- *
- * Load the contents from the 'addr'.
- * Convert the 16-bit value to decimal.
- * Add, storing the result in the accumulator.
 **/
 void Interpreter::DoSUB(string addr, string target) {
 #ifdef EBUG
@@ -283,11 +223,6 @@ void Interpreter::DoSUB(string addr, string target) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE ADDR TARGET " << "SUB        "
                     << addr << " " << target << endl;
-  int location = GetTargetLocation("SUB", addr, target);
-  string data = memory_.at(location).GetBitPattern();
-
-  int int_data = DABnamespace::BitStringToDec(data);
-  accum_ = accum_ - int_data;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoSUB" << endl;
@@ -298,7 +233,7 @@ void Interpreter::DoSUB(string addr, string target) {
  * Function 'DoWRT'.
  * This top level function interprets the 'WRT' opcode.
  *
- * Convert the decimal accumulator to a 32-bit 2s complement value.
+ * Convert the 16-bit accumulator to a 32-bit 2s complement value.
  * Write that value to standard output.
  *
  * Note that we actually write more than just the value itself so we can do
@@ -310,7 +245,7 @@ void Interpreter::DoWRT(ofstream& out_stream) {
 #endif
   Utils::log_stream << "EXECUTE:    OPCODE             " << "WRT" << endl;
 
-  out_stream << TwosComplementInteger(accum_) << endl;
+  out_stream << accum_ << endl;
 
 #ifdef EBUG
   Utils::log_stream << "leave DoWRT" << endl;
@@ -344,13 +279,6 @@ void Interpreter::DumpProgram(ofstream& out_stream) {
  *
  * Execution is basically a switch statement based on the opcode value.
  *
- * Before executing an instruction, this function to checks how many 
- * instructions have been executed. This counter will crash the 
- * program at 100.
- *
- * Branch statements decrease the pc_ by 1 causing the next cycle to be on
- * the correct value
- *
  * Parameters:
  *   this_word - the instance of 'OneMemoryWord' to be executed.
  *   data_scanner - the 'Scanner', needed for the 'RD' instruction
@@ -362,37 +290,27 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
   Utils::log_stream << "enter Execute" << endl;
 #endif
 
-
-  if (instructions_executed_ < 100) {
-    ++instructions_executed_;
-  } else {
-    exit(1);
-  }
-
-  if (this_word.GetMnemonicBits() == "000") {
-    DoBAN(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+  if(this_word.GetMnemonicBits() == "000") {
+    //TODO
   } else if (this_word.GetMnemonicBits() == "001") {
-      DoSUB(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    //SUB
   } else if (this_word.GetMnemonicBits() == "010") {
-      DoSTC(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    //STC
   } else if (this_word.GetMnemonicBits() == "011") {
-      DoAND(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    //AND
   } else if (this_word.GetMnemonicBits() == "100") {
-      DoADD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    //ADD
   } else if (this_word.GetMnemonicBits() == "101") {
-      DoLD(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    //LD
   } else if (this_word.GetMnemonicBits() == "110") {
-      DoBR(this_word.GetAddressBits(), this_word.GetIndirectFlag());
+    //BR
   } else if (this_word.GetMnemonicBits() == "111") {
-    if (this_word.GetLastThree() == "001") {
+    if(this_word.GetLastThree() == "001") {
       DoRD(data_scanner);
     } else if (this_word.GetLastThree() == "010") {
-        DoSTP();
+      DoSTP();
     } else if (this_word.GetLastThree() == "011") {
-        DoWRT(out_stream);
-    } else {
-        cout << "INVALID OPCODE" << endl;
-        exit(1);
+      DoWRT(out_stream);
     }
   }
 #ifdef EBUG
@@ -413,9 +331,6 @@ void Interpreter::FlagAddressOutOfBounds(int address) {
   Utils::log_stream << "enter FlagAddressOutOfBounds" << endl;
 #endif
 
-  if (address >= kMaxMemory) {
-    exit(1);
-  }
 #ifdef EBUG
   Utils::log_stream << "leave FlagAddressOutOfBounds" << endl;
 #endif
@@ -428,13 +343,10 @@ void Interpreter::FlagAddressOutOfBounds(int address) {
  * Note that this function crashes the program if the target location is out
  * of bounds for this simulated computer.
  *
- * If excecutes on direct addressing
- * Else executed on indirect addressing
- *
  * Parameter:
  *   label - the label for our tracing output
- *   address - the address to lookup
- *   target - flag for indirect/direct addressing
+ *   address - is this indirect or not?
+ *   target - the target to look up
 **/
 int Interpreter::GetTargetLocation(string label, string address,
                                    string target) {
@@ -442,17 +354,7 @@ int Interpreter::GetTargetLocation(string label, string address,
   Utils::log_stream << "enter GetTargetLocation" << endl;
 #endif
 
-  int location = DABnamespace::BitStringToDec(address);
-
-  if (target == "0") {
-    FlagAddressOutOfBounds(location);
-    return location;
-  } else {
-    location = DABnamespace::BitStringToDec(
-               memory_.at(location).GetAddressBits());
-    FlagAddressOutOfBounds(location);
-    return location;
-  }
+  int location = -1;
 
 #ifdef EBUG
   Utils::log_stream << "leave GetTargetLocation" << endl;
@@ -483,9 +385,7 @@ void Interpreter::Interpret(Scanner& data_scanner, ofstream& out_stream) {
 #endif
 
   pc_ = 0;
-  instructions_executed_ = 0;
-
-  while (pc_ < kMaxMemory) {
+  while (pc_ < 4096) {
     Execute(memory_.at(pc_), data_scanner, out_stream);
     pc_++;
   }

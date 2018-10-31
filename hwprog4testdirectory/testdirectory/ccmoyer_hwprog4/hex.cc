@@ -116,8 +116,7 @@ void Hex::Init(string text) {
 
 /***************************************************************************
  * Function 'ParseHexOperand'.
- * Verifys value is a valid hex digit then parses the text into a decimal
- * value and sets the error flag.
+ * Parses the text into a decimal value and sets the error flag.
  *
  * The text to be parsed must be exactly five characters long
  * with a plus or minus sign present followed by exactly four
@@ -138,13 +137,35 @@ if(text_.at(0) != '+' && text_.at(0) != '-') {
 
 for (int i = 0; i < text_.length(); ++i) {
   unordered_set<char>::const_iterator find = valid_hex_digits.find(text_.at(i));
-  if (find == valid_hex_digits.end()) {
+  if(find == valid_hex_digits.end()) {
     is_invalid_ == true;
   }
 }
 
+int decimal = 0;
+int count = 0;
+/*
+for(string::reverse_iterator rit = text_.rbegin(); rit != text_.rend() - 1; ++rit) {
+  if (*rit == 'A') {
+    decimal += (10 * pow(16, count));
+  } else if (*rit == 'B') {
+    decimal += (11 * pow(16, count));
+  } else if (*rit == 'C') {
+    decimal += (12 * pow(16, count));
+  } else if (*rit == 'D') {
+    decimal += (13 * pow(16, count));
+  } else if (*rit == 'E') {
+    decimal += (14 * pow(16, count));
+  } else if (*rit == 'D') {
+    decimal += (15 * pow(16, count));
+  } else {
+    decimal += (*rit * pow(16, count));
+  }
+  ++count;
+}
+value_ = decimal;*/
 value_ = stoi(text_, nullptr, 16);
-
+//value_ = decimal;
 #ifdef EBUG
   Utils::log_stream << "leave ParseHexOperand" << endl;
 #endif
