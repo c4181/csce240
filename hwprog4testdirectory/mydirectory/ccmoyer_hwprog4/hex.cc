@@ -116,7 +116,8 @@ void Hex::Init(string text) {
 
 /***************************************************************************
  * Function 'ParseHexOperand'.
- * Parses the text into a decimal value and sets the error flag.
+ * Verifys value is a valid hex digit then parses the text into a decimal
+ * value and sets the error flag.
  *
  * The text to be parsed must be exactly five characters long
  * with a plus or minus sign present followed by exactly four

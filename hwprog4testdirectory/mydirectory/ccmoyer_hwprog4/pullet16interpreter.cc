@@ -49,8 +49,8 @@ Interpreter::~Interpreter() {
  * Function 'DoADD'.
  * This top level function interprets the 'ADD' opcode.
  *
- * Load the contents from the 'target'.
- * Convert the 16-bit value to its 2s complement version as a 32-bit value.
+ * Load the contents from the 'addr'.
+ * Convert the 16-bit value to decimal.
  * Add, storing the result in the accumulator.
  * Arithmetic overflow causes the top bits to be lost but is not flagged
  *   as an error.  It's just the way hardware works.
@@ -78,7 +78,7 @@ void Interpreter::DoADD(string addr, string target) {
  * Function 'DoAND'.
  * This top level function interprets the 'AND' opcode.
  *
- * Load the contents from the 'target', taking indirection into account.
+ * Load the contents from the 'addr', taking indirection into account.
  * AND, storing the result in the accumulator.
 **/
 void Interpreter::DoAND(string addr, string target) {
@@ -116,6 +116,9 @@ void Interpreter::DoAND(string addr, string target) {
  *
  * If the accumulator value is negative, branch to the target location.
  * Otherwise, just continue on continuing on.
+ *
+ * This function decreases the program counter by 1 after branching
+ * to have the PC be on the correct number on the next cycle
 **/
 void Interpreter::DoBAN(string addr, string target) {
 #ifdef EBUG
@@ -138,7 +141,10 @@ void Interpreter::DoBAN(string addr, string target) {
  * Function 'DoBR'.
  * This top level function interprets the 'BR' opcode.
  *
- * Branch unconditionally to the target location.
+ * Branch unconditionally to the addr location.
+ *
+ * This function decreases the program counter by 1 after branching
+ * to have the PC be on the correct number on the next cycle
 **/
 void Interpreter::DoBR(string addr, string target) {
 #ifdef EBUG
@@ -159,7 +165,7 @@ void Interpreter::DoBR(string addr, string target) {
  * Function 'DoLD'.
  * This top level function interprets the 'LD' opcode.
  *
- * Load the accumulator with the contents of the target location.
+ * Load the accumulator with the contents of the addr location.
 **/
 void Interpreter::DoLD(string addr, string target) {
 #ifdef EBUG
@@ -197,10 +203,13 @@ void Interpreter::DoRD(Scanner& data_scanner) {
 #endif
   Utils::log_stream << "OPCODE " << "RD  " << endl;
 
-if(data_scanner.HasNext()) {
+if (data_scanner.HasNext()) {
   string next_line = data_scanner.NextLine();
   Hex the_hex(next_line);
   accum_ = the_hex.GetValue();
+} else {
+  cout << "ERROR: READ PAST END OF FILE" << endl;
+  exit(1);
 }
 #ifdef EBUG
   Utils::log_stream << "leave DoRD" << endl;
@@ -211,7 +220,7 @@ if(data_scanner.HasNext()) {
  * Function 'DoSTC'.
  * This top level function interprets the 'STC' opcode.
  *
- * Get the target location.
+ * Get the addr location.
  * Store the accumulator at that location.
  * Zero the accumulator.
  *
@@ -263,6 +272,10 @@ void Interpreter::DoSTP() {
 /***************************************************************************
  * Function 'DoSUB'.
  * This top level function interprets the 'SUB' opcode.
+ *
+ * Load the contents from the 'addr'.
+ * Convert the 16-bit value to decimal.
+ * Add, storing the result in the accumulator.
 **/
 void Interpreter::DoSUB(string addr, string target) {
 #ifdef EBUG
@@ -285,7 +298,7 @@ void Interpreter::DoSUB(string addr, string target) {
  * Function 'DoWRT'.
  * This top level function interprets the 'WRT' opcode.
  *
- * Convert the 16-bit accumulator to a 32-bit 2s complement value.
+ * Convert the decimal accumulator to a 32-bit 2s complement value.
  * Write that value to standard output.
  *
  * Note that we actually write more than just the value itself so we can do
@@ -377,6 +390,9 @@ void Interpreter::Execute(OneMemoryWord this_word, Scanner& data_scanner,
         DoSTP();
     } else if (this_word.GetLastThree() == "011") {
         DoWRT(out_stream);
+    } else {
+        cout << "INVALID OPCODE" << endl;
+        exit(1);
     }
   }
 #ifdef EBUG
@@ -412,10 +428,13 @@ void Interpreter::FlagAddressOutOfBounds(int address) {
  * Note that this function crashes the program if the target location is out
  * of bounds for this simulated computer.
  *
+ * If excecutes on direct addressing
+ * Else executed on indirect addressing
+ *
  * Parameter:
  *   label - the label for our tracing output
- *   address - is this indirect or not?
- *   target - the target to look up
+ *   address - the address to lookup
+ *   target - flag for indirect/direct addressing
 **/
 int Interpreter::GetTargetLocation(string label, string address,
                                    string target) {
