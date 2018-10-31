@@ -9,7 +9,6 @@
 #ifndef HEX_H
 #define HEX_H
 
-#include <cmath>
 #include <iostream>
 #include <string>
 #include <unordered_set>
@@ -17,7 +16,6 @@
 using std::cin;
 using std::cout;
 using std::endl;
-using std::pow;
 using std::string;
 using std::unordered_set;
 
