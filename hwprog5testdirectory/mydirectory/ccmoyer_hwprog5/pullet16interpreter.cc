@@ -523,6 +523,12 @@ void Interpreter::HW5Binary(string adotout_filename) {
   Utils::log_stream << "enter HW5Binary" << endl;
 #endif
 
+  Scanner ascii_scanner;
+  ascii_scanner.OpenFile(adotout_filename);
+  ReadProgram(ascii_scanner);
+  ascii_scanner.Close();
+
+
 #ifdef EBUG
   Utils::log_stream << "leave HW5Binary" << endl;
 #endif
