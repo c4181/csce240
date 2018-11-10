@@ -518,7 +518,7 @@ int Interpreter::GetTargetLocation(string label, string address,
  * Parameters:
  *   adotout_filename - the name of the file to read
 **/
-void Interpreter::HW5Binary(string adotout_filename) {
+void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
 #ifdef EBUG
   Utils::log_stream << "enter HW5Binary" << endl;
 #endif
@@ -527,8 +527,48 @@ void Interpreter::HW5Binary(string adotout_filename) {
   ascii_scanner.OpenFile(adotout_filename);
   ReadProgram(ascii_scanner);
   ascii_scanner.Close();
+  DumpProgram(out_stream);
 
+  ofstream output_file("bin", ofstream::binary);
+  if(output_file) {
+    char* buffer = new char[2];
+   
+    for(int i = 0; i < memory_.size(); ++i) {
+      string ascii = memory_.at(i).GetBitPattern();
+      bitset<16> bs(ascii);
+      int the_bin = static_cast<int>(bs.to_ulong());
+      buffer = reinterpret_cast<char*>(&the_bin);
+      output_file.write(buffer, 2);
+    }
+    delete[] buffer;
+    output_file.close();
+  }
 
+/*
+  ifstream is (adotout_filename, ifstream::binary);
+  if(is) {
+    is.seekg(0, is.end);
+    int length = is.tellg();
+    is.seekg(0, is.beg);
+
+    char* buffer = new char[length];
+
+    is.read(buffer, length);
+    is.close();
+
+    for(int i = 0; i < length; ++i) {
+    string ascii;
+    for(int j = 0; j < 16; ++i) {
+      ascii += buffer[i];
+    }
+    memory_from_bin_.push_back(ascii);
+  }
+}
+
+  for(int i = 0; i < memory_from_bin_.size(); ++i) {
+    out_stream << memory_from_bin_.at(i);
+  }
+*/
 #ifdef EBUG
   Utils::log_stream << "leave HW5Binary" << endl;
 #endif

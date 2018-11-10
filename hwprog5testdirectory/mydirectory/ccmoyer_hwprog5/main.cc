@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
   Utils::log_stream << kTag << "datafile '" << data_filename << "'" << endl;
   Utils::log_stream << kTag << "outfile  '" << out_filename << "'" << endl;
 
-  interpreter.HW5Binary(adotout_filename);
+  interpreter.HW5Binary(adotout_filename, out_stream);
 //  interpreter.ExpandBinaryToASCII();
 //  interpreter.ReadProgram(adotout_scanner);
 //  adotout_scanner.Close();

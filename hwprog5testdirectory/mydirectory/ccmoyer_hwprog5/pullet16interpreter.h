@@ -9,14 +9,19 @@
 #ifndef INTERPRETER_H
 #define INTERPRETER_H
 
+#include <bitset>
 #include <cstdio>
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
+using std::bitset;
 using std::cin;
 using std::cout;
 using std::endl;
+using std::ifstream;
 using std::ofstream;
 using std::string;
 using std::vector;
@@ -36,7 +41,7 @@ class Interpreter {
 
   void DumpProgram(ofstream& out_stream);
   void Interpret(Scanner& data_scanner, ofstream& out_stream);
-  void HW5Binary(string binary_filename);
+  void HW5Binary(string binary_filename, ofstream& out_stream);
   void ReadProgram(Scanner& infile_scanner);
 
  private:
@@ -49,6 +54,7 @@ class Interpreter {
   string ToString();
 
   vector<OneMemoryWord> memory_;
+  vector<string> memory_from_bin_;
 
   map<string, string> code_to_mnemonic_ = { {"000", "BAN"},
                                             {"001", "SUB"},
