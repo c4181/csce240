@@ -523,12 +523,16 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
   Utils::log_stream << "enter HW5Binary" << endl;
 #endif
 
+
+  // Reads an ascii text file into a vector and then dumps to outfile
   Scanner ascii_scanner;
   ascii_scanner.OpenFile(adotout_filename);
   ReadProgram(ascii_scanner);
   ascii_scanner.Close();
   DumpProgram(out_stream);
 
+  // Uses a bitset to convert the ascii to binary and then writes binary to
+  // a file 16 bits at a time
   ofstream output_file("bin", ofstream::binary);
   if (output_file) {
     char* buffer = new char[2];
@@ -544,9 +548,9 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
     output_file.close();
   }
 
-
+  // Reads back the binary file into an int16_t 16 bits at a time then
+  // converts back to ASCII using the DecToBitString function
   ifstream is("bin", ifstream::binary);
-
   if (is) {
     is.seekg(0, is.end);
     int length = is.tellg();
@@ -560,6 +564,7 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
       memory_from_bin_.push_back(DABnamespace::DecToBitString(digit, 16));
     }
 
+    // Prints out the ASCII that was read back from the binary file
     for (int i = 0; i < memory_from_bin_.size(); ++i) {
       out_stream << memory_from_bin_.at(i) << endl;
     }
