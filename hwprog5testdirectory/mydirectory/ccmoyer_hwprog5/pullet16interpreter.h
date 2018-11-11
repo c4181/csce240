@@ -13,7 +13,7 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
-#include <sstream>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -63,7 +63,7 @@ class Interpreter {
                                             {"100", "ADD"},
                                             {"101", "LD "},
                                             {"110", "BR "},
-                                            {"111", "EEE"}  // STP, RD, WRT 
+                                            {"111", "EEE"}  // STP, RD, WRT
                                           };
   map<string, string> mnemonic_to_code_ = { {"BAN", "000"},
                                             {"SUB", "001"},

@@ -530,121 +530,40 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
   DumpProgram(out_stream);
 
   ofstream output_file("bin", ofstream::binary);
-  if(output_file) {
+  if (output_file) {
     char* buffer = new char[2];
 
-    for(int i = 0; i < memory_.size(); ++i) {
+    for (int i = 0; i < memory_.size(); ++i) {
       string ascii = memory_.at(i).GetBitPattern();
       bitset<16> bs(ascii);
       int the_bin = static_cast<int>(bs.to_ulong());
       buffer = reinterpret_cast<char*>(&the_bin);
       output_file.write(buffer, 2);
     }
-    //delete[] buffer; WHY U DO A CRASH ??!?!?!?!?
+    // delete[] buffer; WHY U DO A CRASH ??!?!?!?!?
     output_file.close();
   }
 
 
-  ifstream is ("bin", ifstream::binary);
-/*  if(is) {
+  ifstream is("bin", ifstream::binary);
+
+  if (is) {
     is.seekg(0, is.end);
     int length = is.tellg();
     is.seekg(0, is.beg);
 
     char* buffer = new char[length];
 
-    is.read(buffer, length);
-    is.close();
-
-    for(int i = 0; i < length; ++i) {
-    string ascii_ptr;
-    for(int j = 0; j < 16; ++j) {
-      ascii_ptr += buffer[j];
-    }
-    string ascii(ascii_ptr);
-    bitset<16> bs(ascii);
-    memory_from_bin_.push_back(bs.to_string());
-  }
-}*/
-
-/*Halfway works
-  if(is) {
-    is.seekg(0, is.end);
-    int length = is.tellg();
-    is.seekg(0, is.beg);
-
-    char* buffer = new char[16];
-
-    for(int i = 0; i < length; i+=2) {
-      is.read(buffer, 2);
-      int bin = *buffer;
-      //string string_bin = std::to_string(bin);
-      bitset<16> bs(bin); 
-      memory_from_bin_.push_back(bs.to_string());
-    }
-  }
-
-  for(int i = 0; i < memory_from_bin_.size(); ++i) {
-    out_stream << memory_from_bin_.at(i) << endl;
-  }*/
-
-    if(is) {
-    is.seekg(0, is.end);
-    int length = is.tellg();
-    is.seekg(0, is.beg);
-
-    char* buffer = new char[length];
-
-    //is.read(buffer, length);
-   // is.close();
-/*
-    for (int i = 0; i < length; i+=8) {
-      string ascii;
-      for (int j = i; j < 16; ++j) {
-        ascii += buffer[j];
-      }
-      memory_from_bin_.push_back(ascii);
-    }*/
-/*
-    int i = 0;
-  string ascii = "";
-  while (i < length) {
-    ascii += buffer[i];
-
-    if(ascii.size() == 16) {
-      memory_from_bin_.push_back(ascii);
-      ascii = "";
-    }
-    ++i;
-  }
-
-  for(int i = 0; i < memory_from_bin_.size(); ++i) {
-    out_stream << memory_from_bin_.at(i) << endl;
-  }*/
-
-    
-
-    for(int i = 0; i < length; i+=2) {
+    for (int i = 0; i < length; i+=2) {
       int16_t digit;
       is.read(reinterpret_cast<char*>(&digit), sizeof(int16_t));
       memory_from_bin_.push_back(DABnamespace::DecToBitString(digit, 16));
     }
-    for(int i = 0; i < memory_from_bin_.size(); ++i) {
-    out_stream << memory_from_bin_.at(i) << endl;
-  }
-    /*
-    string binary (buffer);
 
-    for(int i = 0; i < binary.size(); i+=10) {
-      string bin = binary.substr(i, 2);
-      memory_from_bin_.push_back(bin);
+    for (int i = 0; i < memory_from_bin_.size(); ++i) {
+      out_stream << memory_from_bin_.at(i) << endl;
     }
-    for(int i = 0; i < memory_from_bin_.size(); ++i) {
-    out_stream << memory_from_bin_.at(i) << endl;
-  }*/
 }
-
-  
 
 #ifdef EBUG
   Utils::log_stream << "leave HW5Binary" << endl;
