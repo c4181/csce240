@@ -567,6 +567,7 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
   }
 }*/
 
+/*Halfway works
   if(is) {
     is.seekg(0, is.end);
     int length = is.tellg();
@@ -585,7 +586,65 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
 
   for(int i = 0; i < memory_from_bin_.size(); ++i) {
     out_stream << memory_from_bin_.at(i) << endl;
+  }*/
+
+    if(is) {
+    is.seekg(0, is.end);
+    int length = is.tellg();
+    is.seekg(0, is.beg);
+
+    char* buffer = new char[length];
+
+    //is.read(buffer, length);
+   // is.close();
+/*
+    for (int i = 0; i < length; i+=8) {
+      string ascii;
+      for (int j = i; j < 16; ++j) {
+        ascii += buffer[j];
+      }
+      memory_from_bin_.push_back(ascii);
+    }*/
+/*
+    int i = 0;
+  string ascii = "";
+  while (i < length) {
+    ascii += buffer[i];
+
+    if(ascii.size() == 16) {
+      memory_from_bin_.push_back(ascii);
+      ascii = "";
+    }
+    ++i;
   }
+
+  for(int i = 0; i < memory_from_bin_.size(); ++i) {
+    out_stream << memory_from_bin_.at(i) << endl;
+  }*/
+
+    
+
+    for(int i = 0; i < length; i+=2) {
+      int16_t digit;
+      is.read(reinterpret_cast<char*>(&digit), sizeof(int16_t));
+      memory_from_bin_.push_back(DABnamespace::DecToBitString(digit, 16));
+    }
+    for(int i = 0; i < memory_from_bin_.size(); ++i) {
+    out_stream << memory_from_bin_.at(i) << endl;
+  }
+    /*
+    string binary (buffer);
+
+    for(int i = 0; i < binary.size(); i+=10) {
+      string bin = binary.substr(i, 2);
+      memory_from_bin_.push_back(bin);
+    }
+    for(int i = 0; i < memory_from_bin_.size(); ++i) {
+    out_stream << memory_from_bin_.at(i) << endl;
+  }*/
+}
+
+  
 
 #ifdef EBUG
   Utils::log_stream << "leave HW5Binary" << endl;
