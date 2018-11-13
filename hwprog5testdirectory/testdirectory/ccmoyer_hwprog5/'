@@ -524,17 +524,17 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
 
   // Reads an ascii text file into a vector and then dumps to outfile
   Scanner ascii_scanner;
-  ascii_scanner.OpenFile(adotout_filename + ".txt");
+  ascii_scanner.OpenFile(adotout_filename);
   ReadProgram(ascii_scanner);
   ascii_scanner.Close();
   out_stream << "Dumping ASCII Vector" << endl;
   for (int i = 0; i < memory_.size(); ++i) {
-    out_stream << memory_.at(i).GetBitPattern() << endl;
+   out_stream << memory_.at(i).GetBitPattern() << endl;
   }
 
   // Uses a bitset to convert the ascii to binary and then writes binary to
   // a file 16 bits at a time
-  ofstream output_file(adotout_filename + ".bin", ofstream::binary);
+  ofstream output_file("bin", ofstream::binary);
   if (output_file) {
     char* buffer = new char[2];
 
@@ -550,18 +550,19 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
 
   // Reads back the binary file into an int16_t 16 bits at a time then
   // converts back to ASCII using the DecToBitString function
-  ifstream is(adotout_filename + ".bin", ifstream::binary);
+  ifstream is("bin", ifstream::binary);
   if (is) {
     is.seekg(0, is.end);
     int length = is.tellg();
     is.seekg(0, is.beg);
+
+    char* buffer = new char[length];
 
     for (int i = 0; i < length; i+=2) {
       int16_t the_binary;
       is.read(reinterpret_cast<char*>(&the_binary), sizeof(int16_t));
       memory_from_bin_.push_back(DABnamespace::DecToBitString(the_binary, 16));
     }
-  is.close();
 
     // Prints out the ASCII that was read back from the binary file
     out_stream << "Printing reconstructed vector" << endl;
@@ -572,11 +573,11 @@ void Interpreter::HW5Binary(string adotout_filename, ofstream& out_stream) {
 
   // Check that the original ASCII vector and read from binary file
   // vector are equal
-  bool vectors_are_equal = true;
+  bool vectors_are_equal;
 
     for (int i = 0; i < memory_.size(); ++i) {
        if (memory_.at(i).GetBitPattern() != memory_from_bin_.at(i)) {
-         vectors_are_equal = false;
+         vectors_are_equal = false
          break;
        }
     }

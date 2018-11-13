@@ -16,7 +16,7 @@ do
   cd $item
   cp ../../adotoutsquares.txt .
   cp ../../zzin.txt .
-  Aprog adotoutsquares zzin.txt zmyout.txt zmylog.txt
+  ./Aprog adotoutsquares zzin.txt zmyout.txt zmylog.txt
   rm adotoutsquares.txt
   rm zzin.txt
   cd ..
