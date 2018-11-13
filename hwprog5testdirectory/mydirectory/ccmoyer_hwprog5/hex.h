@@ -27,7 +27,7 @@ class Hex {
  public:
   Hex();
 //  Hex(string hexoperand, Globals globals);
-  Hex(string hexoperand);
+  explicit Hex(string hexoperand);
   virtual ~Hex();
 
   string GetErrorMessages() const;
