@@ -1,0 +1,283 @@
+Script started on Mon 12 Nov 2018 11:11:07 PM EST
+groups: cannot find name for group ID 1816144587
+groups: cannot find name for group ID 1816144851
+groups: cannot find name for group ID 1816147342
+groups: cannot find name for group ID 1816147762
+groups: cannot find name for group ID 1816148077
+groups: cannot find name for group ID 1816148269
+groups: cannot find name for group ID 1816150572
+groups: cannot find name for group ID 1816168438
+groups: cannot find name for group ID 1816189668
+groups: cannot find name for group ID 1816194696
+groups: cannot find name for group ID 1816195405
+groups: cannot find name for group ID 1816195642
+groups: cannot find name for group ID 1816197292
+groups: cannot find name for group ID 1816197830
+groups: cannot find name for group ID 1816197889
+groups: cannot find name for group ID 1816388100
+groups: cannot find name for group ID 1816431626
+groups: cannot find name for group ID 1816548777
+groups: cannot find name for group ID 1816559825
+groups: cannot find name for group ID 1816605306
+groups: cannot find name for group ID 1816605548
+groups: cannot find name for group ID 1816605551
+groups: cannot find name for group ID 1816605572
+groups: cannot find name for group ID 1816606963
+groups: cannot find name for group ID 1816607141
+groups: cannot find name for group ID 1816607809
+groups: cannot find name for group ID 1816608406
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory$ ./zs[KaZipUpScript.txt 
+Remove the old 'assignment' directory
+Create a new 'assignment' directory
+Descend into 'mydirectory' directory
+Descend into directory ccmoyer_hwprog5
+Execute 'uname' to verify system
+Return from directory ccmoyer_hwprog5
+tar directory ccmoyer_hwprog5
+ccmoyer_hwprog5/
+ccmoyer_hwprog5/test.bin
+ccmoyer_hwprog5/adotouttestread.txt
+ccmoyer_hwprog5/adotoutreadwrite.txt
+ccmoyer_hwprog5/bin
+ccmoyer_hwprog5/adotoutfib.txt
+ccmoyer_hwprog5/adotoutreadwrite.bin
+ccmoyer_hwprog5/adotoutloop.bin
+ccmoyer_hwprog5/adotoutsquares.bin
+ccmoyer_hwprog5/adotout5.txt
+ccmoyer_hwprog5/zushell
+ccmoyer_hwprog5/adotoutloop.txt
+ccmoyer_hwprog5/onememoryword.h
+ccmoyer_hwprog5/adotout4.txt
+ccmoyer_hwprog5/adotoutsquares.txt
+ccmoyer_hwprog5/'
+ccmoyer_hwprog5/hex.h
+ccmoyer_hwprog5/pullet16interpreter.h
+ccmoyer_hwprog5/adotoutdata.bin
+ccmoyer_hwprog5/adotoutcount.txt
+ccmoyer_hwprog5/adotoutcount.bin
+ccmoyer_hwprog5/zlogcount
+ccmoyer_hwprog5/pullet16interpreter.cc
+ccmoyer_hwprog5/dabnamespace.h
+ccmoyer_hwprog5/mycpplint
+ccmoyer_hwprog5/dabnamespace.cc
+ccmoyer_hwprog5/adotout1.txt
+ccmoyer_hwprog5/zlogsquares
+ccmoyer_hwprog5/adotout2.txt
+ccmoyer_hwprog5/adotoutfib.bin
+ccmoyer_hwprog5/zlogfib
+ccmoyer_hwprog5/SystemUNAME.txt
+ccmoyer_hwprog5/adotoutteststc.txt
+ccmoyer_hwprog5/adotout3.txt
+ccmoyer_hwprog5/main.cc
+ccmoyer_hwprog5/main.h
+ccmoyer_hwprog5/adotoutdata.txt
+ccmoyer_hwprog5/zmyout.txt
+ccmoyer_hwprog5/zlogreadwrite
+ccmoyer_hwprog5/adotouttestsub.txt
+ccmoyer_hwprog5/zlogdata
+ccmoyer_hwprog5/hex.cc
+ccmoyer_hwprog5/zmylog.txt
+ccmoyer_hwprog5/onememoryword.cc
+ccmoyer_hwprog5/adotouttestadd.txt
+ccmoyer_hwprog5/adotout6.txt
+ccmoyer_hwprog5/zlogloop
+ccmoyer_hwprog5/adotouttestand.txt
+gzip directory ccmoyer_hwprog5
+cp gzipped file to 'assignment'
+rm the gzipped file from  ccmoyer_hwprog5
+Return from 'mydirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory$ ./zbFileCopyScript.txt 
+Remove the old 'testdirectory' directory
+Create a new 'testdirectory' directory
+cp all the submissions from 'assignment' into 'testdirectory'
+Descend into 'testdirectory' directory
+untar directory tarfileccmoyer_hwprog5
+ccmoyer_hwprog5/
+ccmoyer_hwprog5/test.bin
+ccmoyer_hwprog5/adotouttestread.txt
+ccmoyer_hwprog5/adotoutreadwrite.txt
+ccmoyer_hwprog5/bin
+ccmoyer_hwprog5/adotoutfib.txt
+ccmoyer_hwprog5/adotoutreadwrite.bin
+ccmoyer_hwprog5/adotoutloop.bin
+ccmoyer_hwprog5/adotoutsquares.bin
+ccmoyer_hwprog5/adotout5.txt
+ccmoyer_hwprog5/zushell
+ccmoyer_hwprog5/adotoutloop.txt
+ccmoyer_hwprog5/onememoryword.h
+ccmoyer_hwprog5/adotout4.txt
+ccmoyer_hwprog5/adotoutsquares.txt
+ccmoyer_hwprog5/'
+ccmoyer_hwprog5/hex.h
+ccmoyer_hwprog5/pullet16interpreter.h
+ccmoyer_hwprog5/adotoutdata.bin
+ccmoyer_hwprog5/adotoutcount.txt
+ccmoyer_hwprog5/adotoutcount.bin
+ccmoyer_hwprog5/zlogcount
+ccmoyer_hwprog5/pullet16interpreter.cc
+ccmoyer_hwprog5/dabnamespace.h
+ccmoyer_hwprog5/mycpplint
+ccmoyer_hwprog5/dabnamespace.cc
+ccmoyer_hwprog5/adotout1.txt
+ccmoyer_hwprog5/zlogsquares
+ccmoyer_hwprog5/adotout2.txt
+ccmoyer_hwprog5/adotoutfib.bin
+ccmoyer_hwprog5/zlogfib
+ccmoyer_hwprog5/SystemUNAME.txt
+ccmoyer_hwprog5/adotoutteststc.txt
+ccmoyer_hwprog5/adotout3.txt
+ccmoyer_hwprog5/main.cc
+ccmoyer_hwprog5/main.h
+ccmoyer_hwprog5/adotoutdata.txt
+ccmoyer_hwprog5/zmyout.txt
+ccmoyer_hwprog5/zlogreadwrite
+ccmoyer_hwprog5/adotouttestsub.txt
+ccmoyer_hwprog5/zlogdata
+ccmoyer_hwprog5/hex.cc
+ccmoyer_hwprog5/zmylog.txt
+ccmoyer_hwprog5/onememoryword.cc
+ccmoyer_hwprog5/adotouttestadd.txt
+ccmoyer_hwprog5/adotout6.txt
+ccmoyer_hwprog5/zlogloop
+ccmoyer_hwprog5/adotouttestand.txt
+Remove the tar files
+Return from 'testdirectory' directory
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory$ ./zcCompileScript.txt 
+Descend into 'testdirectory' directory
+ 
+COMPILING ccmoyer_hwprog5
+rm: cannot remove '*.o': No such file or directory
+rm: cannot remove 'Aprog': No such file or directory
+g++ -O3 -Wall -std=c++11 -DBINARY -c main.cc
+g++ -O3 -Wall -std=c++11 -c dabnamespace.cc
+g++ -O3 -Wall -std=c++11 -c pullet16interpreter.cc
+[01m[Kpullet16interpreter.cc:[m[K In member function ‘[01m[Kvoid Interpreter::HW5Binary(std::__cxx11::string, std::ofstream&)[m[K’:
+[01m[Kpullet16interpreter.cc:531:21:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (int i = 0; i < memory_.size(); ++i) {
+[01;32m[K                     ^[m[K
+[01m[Kpullet16interpreter.cc:541:23:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (int i = 0; i < memory_.size(); ++i) {
+[01;32m[K                       ^[m[K
+[01m[Kpullet16interpreter.cc:568:23:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (int i = 0; i < memory_from_bin_.size(); ++i) {
+[01;32m[K                       ^[m[K
+[01m[Kpullet16interpreter.cc:577:23:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (int i = 0; i < memory_.size(); ++i) {
+[01;32m[K                       ^[m[K
+[01m[Kpullet16interpreter.cc:[m[K In member function ‘[01m[Kvoid Interpreter::Interpret(Scanner&, std::ofstream&)[m[K’:
+[01m[Kpullet16interpreter.cc:644:13:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+     if (pc_ >= memory_.size()) {
+[01;32m[K             ^[m[K
+g++ -O3 -Wall -std=c++11 -c hex.cc
+[01m[Khex.cc:[m[K In member function ‘[01m[Kvoid Hex::ParseHexOperand()[m[K’:
+[01m[Khex.cc:166:17:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+     if ((value1 == string::npos) || (value2 == string::npos) ||
+[01;32m[K                 ^[m[K
+[01m[Khex.cc:166:45:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+     if ((value1 == string::npos) || (value2 == string::npos) ||
+[01;32m[K                                             ^[m[K
+[01m[Khex.cc:167:17:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+         (value3 == string::npos) || (value4 == string::npos)) {
+[01;32m[K                 ^[m[K
+[01m[Khex.cc:167:45:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+         (value3 == string::npos) || (value4 == string::npos)) {
+[01;32m[K                                             ^[m[K
+g++ -O3 -Wall -std=c++11 -c onememoryword.cc
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/scanner.cc
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/scanline.cc
+g++ -O3 -Wall -std=c++11 -c ../../Utilities/utils.cc
+g++ -O3 -Wall -std=c++11 -o Aprog main.o dabnamespace.o pullet16interpreter.o hex.o onememoryword.o scanner.o scanline.o utils.o
+Return from 'testdirectory' directory
+ 
+COMPILING COMPLETE
+ 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory$ ./zdExecuteScript.txt 
+Descend into 'testdirectory' directory
+ 
+EXECUTING ccmoyer_hwprog5
+UTILS: open the logfile 'zmylog.txt'
+UTILS: open succeeded for 'zmylog.txt'
+UTILS: open the input file 'zzin.txt'
+UTILS: open succeeded for 'zzin.txt'
+UTILS: open the output file 'zmyout.txt'
+UTILS: open succeeded for 'zmyout.txt'
+UTILS: open the input file 'adotoutsquares.txt'
+UTILS: open succeeded for 'adotoutsquares.txt'
+UTILS: close the input file
+UTILS: the input file was closed
+UTILS: close the output file
+UTILS: the output file was closed
+UTILS: close the output file
+UTILS: the output file was closed
+EXECUTION COMPLETE
+Return from 'testdirectory' directory
+ 
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory$ cat testdirectory/ccmoyer_hwprog5/zmyout.txt 
+Dumping ASCII Vector
+1010000000010010
+1010000000010101
+1110000000000011
+1010000000010101
+1000000000010100
+1000000000010100
+1000000000010011
+1110000000000011
+0100000000010101
+1010000000010100
+1000000000010011
+0100000000010100
+1010000000010010
+1000000000010011
+0100000000010010
+1010000000010010
+0000000000000011
+1110000000000010
+1111111111111011
+0000000000000001
+0000000000000011
+0000000000001001
+Printing reconstructed vector
+1010000000010010
+1010000000010101
+1110000000000011
+1010000000010101
+1000000000010100
+1000000000010100
+1000000000010011
+1110000000000011
+0100000000010101
+1010000000010100
+1000000000010011
+0100000000010100
+1010000000010010
+1000000000010011
+0100000000010010
+1010000000010010
+0000000000000011
+1110000000000010
+1111111111111011
+0000000000000001
+0000000000000011
+0000000000001001
+Vectors are equal
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectoryccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory$ t[Kcd testdirectory/ccmoyer_hwprog5/
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectory/testdirectory/ccmoyer_hwprog5ccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory/testdirectory/ccmoyer_hwprog5$ ./mc[Kycpplint *.c [Kc &[K*.h
+Done processing dabnamespace.cc
+Done processing hex.cc
+Done processing main.cc
+Done processing onememoryword.cc
+Done processing pullet16interpreter.cc
+Done processing dabnamespace.h
+Done processing hex.h
+Done processing main.h
+Done processing onememoryword.h
+pullet16interpreter.h:43:  Is this a non-const reference? If so, make const or use a pointer: Scanner& data_scanner  [runtime/references] [2]
+pullet16interpreter.h:45:  Is this a non-const reference? If so, make const or use a pointer: Scanner& infile_scanner  [runtime/references] [2]
+pullet16interpreter.h:86:  Is this a non-const reference? If so, make const or use a pointer: Scanner& data_scanner  [runtime/references] [2]
+pullet16interpreter.h:92:  Is this a non-const reference? If so, make const or use a pointer: Scanner& data_scanner  [runtime/references] [2]
+Done processing pullet16interpreter.h
+Total errors found: 4
+]0;ccmoyer@cocsce-l1d39-13: ~/csce240/hwprog5testdirectory/testdirectory/ccmoyer_hwprog5ccmoyer@cocsce-l1d39-13:~/csce240/hwprog5testdirectory/testdirectory/ccmoyer_hwprog5$ exit
+exit
+
+Script done on Mon 12 Nov 2018 11:11:53 PM EST
