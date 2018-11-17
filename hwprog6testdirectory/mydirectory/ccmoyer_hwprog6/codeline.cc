@@ -4,14 +4,15 @@
  * Class 'CodeLine' as a container for one line of code.
  *
  * Author/copyright:  Duncan A. Buell.  All rights reserved.
- * Used with permission and modified by: Jane Random Hacker
- * Date: 17 August 2018
+ * Used with permission and modified by: Christopher Moyer
+ * Date: 16 November 2018
 **/
 
 /***************************************************************************
  * Constructor
 **/
-CodeLine::CodeLine() {
+CodeLine::CodeLine(string code_line, int line_number, int pc) {
+  Initialize(code_line, line_number, pc);
 }
 
 //CodeLine::CodeLine(Globals globals) {
@@ -35,7 +36,7 @@ string CodeLine::GetAddr() const {
   string returnvalue;
 
   code goes here
-  }
+
   return returnvalue;
 }
 
@@ -112,6 +113,24 @@ bool CodeLine::IsAllComment() const {
 /***************************************************************************
  * General functions.
 **/
+
+/***************************************************************************
+ * Function 'Initialize'.
+**/
+void CodeLine::Initialize(string code_line, int line_number, int pc) {
+  if (code_line.at(0) == '*') {
+    SetCommentsOnly(line_number, code_line);
+  } else {
+    string label = code_line.substr(0, 3);
+    string mnemonic = code_line.substr(4, 3);
+    string addresssing = code_line.substr(8, 1);
+    string symbolic_operand = code_line.substr(10, 3);
+    string hex = code_line.substr(14, 5);
+    string comments = code_line.substr(20, code_line.size() - 20);
+    SetCodeLine(line_number, pc, label, mnemonic, addresssing,
+                symbolic_operand, hex, comments, code_line);
+  }
+}
 
 /***************************************************************************
  * Function 'SetCodeLine'.

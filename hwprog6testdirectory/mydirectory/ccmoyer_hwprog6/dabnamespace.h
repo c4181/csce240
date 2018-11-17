@@ -2,8 +2,8 @@
  * Header file for the namespace for global things.
  *
  * Author/copyright:  Duncan A. Buell.  All rights reserved.
- * Used with permission and modified by: Jane Random Hacker
- * Date: 21 September 2018
+ * Used with permission and modified by: Christopher Moyer
+ * Date: 16 November 2018
 **/
 
 #ifndef NAMESPACE_H

@@ -4,8 +4,8 @@
  * Class 'Hex' as a container for one hex operand.
  *
  * Author/copyright:  Duncan A. Buell.  All rights reserved.
- * Used with permission and modified by: Jane Random Hacker
- * Date: 17 August 2018
+ * Used with permission and modified by: Christopher Moyer
+ * Date: 16 November 2018
  *
  * We use an instance of a class for a hex operand since there are
  * a nuber of things we need to do with the operand and a number of tests

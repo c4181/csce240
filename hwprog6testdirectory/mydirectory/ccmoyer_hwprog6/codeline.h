@@ -2,8 +2,8 @@
  * Header file for the 'CodeLine' class to contain one code line.
  *
  * Author/copyright:  Duncan A. Buell.  All rights reserved.
- * Used with permission and modified by: Jane Random Hacker
- * Date: 17 August 2018
+ * Used with permission and modified by: Christopher Moyer
+ * Date: 16 November 2018
 **/
 
 #ifndef CODELINE_H
@@ -42,6 +42,7 @@ class CodeLine {
   bool HasLabel() const;
   bool HasSymOperand() const;
 
+  void Initialize(string code_line, int line_number, int pc);
   bool IsAllComment() const;
   void SetCodeLine(int linecounter, int pc, string label, string mnemonic,
                    string addr, string symoperand, string hexoperand,
