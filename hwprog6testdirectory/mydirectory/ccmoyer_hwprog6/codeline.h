@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <ctype.h>
 
 using std::cin;
 using std::cout;
@@ -26,7 +27,7 @@ using std::string;
 
 class CodeLine {
  public:
-  CodeLine();
+  CodeLine(string code_line, int line_number, int pc);
   virtual ~CodeLine();
 
   string GetAddr() const;

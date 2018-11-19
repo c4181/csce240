@@ -35,7 +35,7 @@ CodeLine::~CodeLine() {
 string CodeLine::GetAddr() const {
   string returnvalue;
 
-  code goes here
+  // code goes here
 
   return returnvalue;
 }
@@ -93,14 +93,14 @@ string CodeLine::GetSymOperand() const {
  * Boolean indicator of the presence of a label.
 **/
 bool CodeLine::HasLabel() const {
-  return something
+ // return something
 }
 
 /***************************************************************************
  * Boolean indicator of the presence of a symbolic operand.
 **/
 bool CodeLine::HasSymOperand() const {
-  return something
+  // return something
 }
 
 /***************************************************************************
@@ -118,15 +118,88 @@ bool CodeLine::IsAllComment() const {
  * Function 'Initialize'.
 **/
 void CodeLine::Initialize(string code_line, int line_number, int pc) {
+
+  /*
+  label = code_line.substr(0, 3);
+      mnemonic = code_line.substr(4, 3);
+      addresssing = code_line.substr(8, 1);
+      symbolic_operand = code_line.substr(10, 3);
+      hex = code_line.substr(14, 5);
+      comments = code_line.substr(20, code_line.size() - 20);
+      */
   if (code_line.at(0) == '*') {
     SetCommentsOnly(line_number, code_line);
   } else {
-    string label = code_line.substr(0, 3);
-    string mnemonic = code_line.substr(4, 3);
-    string addresssing = code_line.substr(8, 1);
-    string symbolic_operand = code_line.substr(10, 3);
-    string hex = code_line.substr(14, 5);
-    string comments = code_line.substr(20, code_line.size() - 20);
+
+    string label = "";
+    string mnemonic = "";
+    string addresssing = "";
+    string symbolic_operand = "";
+    string hex = "";
+    string comments = "";
+
+    if (isspace(code_line.at(0)) == 0) {
+      label = "nulllabel";
+      label = code_line.substr(0, code_line.find(" ")+1);
+    } else {
+      label = "nulllabel";
+    }
+    /*
+    try {
+      label = code_line.substr(0, 3);
+      if (label = "   ")
+      label = "nulllabel";
+    } catch (const std::out_of_range& oor) {
+      try {
+        label = code_line.substr(0, 2);
+      } catch (const std::out_of_range& oor) {
+        label = "nulllabel";
+      }
+    }*/
+
+    // Mnumennic
+    try {
+     mnemonic = code_line.substr(4, 3);
+    } catch (const std::out_of_range& oor) {
+      try {
+       mnemonic = code_line.substr(4, 2);
+      } catch (const std::out_of_range& oor) {
+        mnemonic = "nullmnemonic";
+      }
+    }
+
+    // Addressing
+    try {
+      addresssing = code_line.substr(8, 1);
+    } catch (const std::out_of_range& oor) {
+      addresssing = "  ";
+    }
+
+    // Symbolic Operand
+    try {
+      symbolic_operand = code_line.substr(10, 3);
+    } catch (const std::out_of_range& oor) {
+      try {
+        symbolic_operand = code_line.substr(10, 2) + " ";
+      } catch (const std::out_of_range& oor) {
+        symbolic_operand = "nullsymoperand";
+      }
+    }
+
+    // Hex
+    try {
+      hex = code_line.substr(14, 5);
+    } catch (const std::out_of_range& oor) {
+      hex = "nullhexoperand";
+    }
+
+    // Comments
+    try {
+      comments = code_line.substr(20, code_line.size() - 20);
+    } catch (const std::out_of_range& oor) {
+      comments = "nullcomments";
+    }
+
     SetCodeLine(line_number, pc, label, mnemonic, addresssing,
                 symbolic_operand, hex, comments, code_line);
   }
@@ -157,7 +230,7 @@ void CodeLine::SetCodeLine(int linecounter, int pc, string label,
   symoperand_ = symoperand;
   hex_ = Hex(hexoperand);
   comments_ = comments;
-  code_ = code;
+  code_ = "nullcode";
 
   is_all_comment_ = false;
 }
@@ -170,6 +243,11 @@ void CodeLine::SetCodeLine(int linecounter, int pc, string label,
  *   line - the code line that is taken to be all comments
 **/
 void CodeLine::SetCommentsOnly(int linecounter, string line) {
+  linecounter_ = linecounter;
+  comments_ = line;
+  code_ = line;
+
+  is_all_comment_ = true;
 }
 
 /***************************************************************************

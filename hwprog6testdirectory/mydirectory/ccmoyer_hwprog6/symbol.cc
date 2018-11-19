@@ -18,7 +18,7 @@ Symbol::Symbol() {
  * Constructor
 **/
 Symbol::Symbol(string text, int programcounter) {
-  code goes here
+  // code goes here
 }
 
 /******************************************************************************
@@ -74,7 +74,7 @@ void Symbol::SetMultiply() {
 bool Symbol::CheckInvalid() const {
   bool returnvalue = false;  // false means no, not invalid
 
-  code goes here
+ // code goes here
 
   return returnvalue;
 }

@@ -47,6 +47,9 @@ void Assembler::Assemble(Scanner& in_scanner, string binary_filename,
   //////////////////////////////////////////////////////////////////////////
   // Pass one
   // Produce the symbol table and detect errors in symbols.
+  PassOne(in_scanner);
+
+  PrintCodeLines();
 
   //////////////////////////////////////////////////////////////////////////
   // Pass two
@@ -70,7 +73,7 @@ void Assembler::Assemble(Scanner& in_scanner, string binary_filename,
 **/
 string Assembler::GetInvalidMessage(string leadingtext, string symbol) {
 
-  return returnvalue;
+  // return returnvalue;
 }
 
 /***************************************************************************
@@ -96,7 +99,7 @@ string Assembler::GetInvalidMessage(string leadingtext, Hex hex) {
 **/
 string Assembler::GetUndefinedMessage(string badtext) {
 
-  return returnvalue;
+  // return returnvalue;
 }
 
 /***************************************************************************
@@ -116,6 +119,20 @@ void Assembler::PassOne(Scanner& in_scanner) {
 #ifdef EBUG
   Utils::log_stream << "enter PassOne" << endl;
 #endif
+
+  int line_number = 0;
+
+  string line;
+
+  std::ifstream my_file("../../xin1source.txt");
+  if (my_file.is_open()) {
+    while (getline (my_file, line)) {
+      CodeLine next_line(line, line_number, line_number - 1);
+      codelines_.push_back(next_line);
+      ++line_number;
+    }
+    my_file.close();
+  }
 
 #ifdef EBUG
   Utils::log_stream << "leave PassOne" << endl;
@@ -190,7 +207,7 @@ void Assembler::PrintSymbolTable() {
 #ifdef EBUG
   Utils::log_stream << "leave PrintSymbolTable" << endl;
 #endif
-  Utils::log_stream << s << endl;
+ // Utils::log_stream << s << endl;
 }
 
 /******************************************************************************
