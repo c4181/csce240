@@ -119,14 +119,6 @@ bool CodeLine::IsAllComment() const {
 **/
 void CodeLine::Initialize(string code_line, int line_number, int pc) {
 
-  /*
-  label = code_line.substr(0, 3);
-      mnemonic = code_line.substr(4, 3);
-      addresssing = code_line.substr(8, 1);
-      symbolic_operand = code_line.substr(10, 3);
-      hex = code_line.substr(14, 5);
-      comments = code_line.substr(20, code_line.size() - 20);
-      */
   if (code_line.at(0) == '*') {
     SetCommentsOnly(line_number, code_line);
   } else {
@@ -144,18 +136,6 @@ void CodeLine::Initialize(string code_line, int line_number, int pc) {
     } else {
       label = "nulllabel";
     }
-    /*
-    try {
-      label = code_line.substr(0, 3);
-      if (label = "   ")
-      label = "nulllabel";
-    } catch (const std::out_of_range& oor) {
-      try {
-        label = code_line.substr(0, 2);
-      } catch (const std::out_of_range& oor) {
-        label = "nulllabel";
-      }
-    }*/
 
     // Mnumennic
     try {
