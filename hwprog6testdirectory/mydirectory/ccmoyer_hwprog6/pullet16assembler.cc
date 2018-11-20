@@ -38,7 +38,7 @@ Assembler::~Assembler() {
  *   in_scanner - the scanner to read for source code
  *   out_stream - the output stream to write to
 **/
-void Assembler::Assemble(Scanner& in_scanner, string binary_filename,
+void Assembler::Assemble(string infilename, string binary_filename,
                          ofstream& out_stream) {
 #ifdef EBUG
   Utils::log_stream << "enter Assemble" << endl;
@@ -47,7 +47,7 @@ void Assembler::Assemble(Scanner& in_scanner, string binary_filename,
   //////////////////////////////////////////////////////////////////////////
   // Pass one
   // Produce the symbol table and detect errors in symbols.
-  PassOne(in_scanner);
+  PassOne(infilename);
 
   PrintCodeLines();
 
@@ -112,10 +112,10 @@ string Assembler::GetUndefinedMessage(string badtext) {
  *         Mnemonics are three characters, possibly with one blank at end.
  *
  * Parameters:
- *   in_scanner - the input stream from which to read
+ *   infilename - the file to read
  *   out-stream - the output stream to which to write
 **/
-void Assembler::PassOne(Scanner& in_scanner) {
+void Assembler::PassOne(string infilename) {
 #ifdef EBUG
   Utils::log_stream << "enter PassOne" << endl;
 #endif
@@ -124,7 +124,7 @@ void Assembler::PassOne(Scanner& in_scanner) {
 
   string line;
 
-  std::ifstream my_file("../../xin1source.txt");
+  std::ifstream my_file(infilename);
   if (my_file.is_open()) {
     while (getline (my_file, line)) {
       CodeLine next_line(line, line_number, line_number - 1);
