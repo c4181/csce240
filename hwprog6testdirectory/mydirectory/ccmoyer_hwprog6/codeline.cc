@@ -15,7 +15,7 @@ CodeLine::CodeLine(string code_line, int line_number, int pc) {
   Initialize(code_line, line_number, pc);
 }
 
-//CodeLine::CodeLine(Globals globals) {
+// CodeLine::CodeLine(Globals globals) {
 //  globals_ = globals;
 //}
 
@@ -93,7 +93,7 @@ string CodeLine::GetSymOperand() const {
  * Boolean indicator of the presence of a label.
 **/
 bool CodeLine::HasLabel() const {
- // return something
+  // return something
 }
 
 /***************************************************************************
@@ -118,11 +118,9 @@ bool CodeLine::IsAllComment() const {
  * Function 'Initialize'.
 **/
 void CodeLine::Initialize(string code_line, int line_number, int pc) {
-
   if (code_line.at(0) == '*') {
     SetCommentsOnly(line_number, code_line);
   } else {
-
     string label = "";
     string mnemonic = "";
     string addresssing = "";

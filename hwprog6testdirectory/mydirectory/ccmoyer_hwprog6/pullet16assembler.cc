@@ -13,7 +13,6 @@
  * Constructor
 **/
 Assembler::Assembler() {
-
 }
 
 /***************************************************************************
@@ -72,7 +71,6 @@ void Assembler::Assemble(string infilename, string binary_filename,
  *   symbol - the symbol that is invalid
 **/
 string Assembler::GetInvalidMessage(string leadingtext, string symbol) {
-
   // return returnvalue;
 }
 
@@ -98,7 +96,6 @@ string Assembler::GetInvalidMessage(string leadingtext, Hex hex) {
  *   badtext - the undefined symbol text
 **/
 string Assembler::GetUndefinedMessage(string badtext) {
-
   // return returnvalue;
 }
 
@@ -126,7 +123,7 @@ void Assembler::PassOne(string infilename) {
 
   std::ifstream my_file(infilename);
   if (my_file.is_open()) {
-    while (getline (my_file, line)) {
+    while (getline(my_file, line)) {
       CodeLine next_line(line, line_number, line_number - 1);
       codelines_.push_back(next_line);
       ++line_number;
@@ -207,7 +204,7 @@ void Assembler::PrintSymbolTable() {
 #ifdef EBUG
   Utils::log_stream << "leave PrintSymbolTable" << endl;
 #endif
- // Utils::log_stream << s << endl;
+  // Utils::log_stream << s << endl;
 }
 
 /******************************************************************************

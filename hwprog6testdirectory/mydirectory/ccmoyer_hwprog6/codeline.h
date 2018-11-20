@@ -9,9 +9,9 @@
 #ifndef CODELINE_H
 #define CODELINE_H
 
+#include <ctype.h>
 #include <iostream>
 #include <string>
-#include <ctype.h>
 
 using std::cin;
 using std::cout;

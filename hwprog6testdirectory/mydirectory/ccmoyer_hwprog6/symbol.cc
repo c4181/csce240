@@ -74,7 +74,7 @@ void Symbol::SetMultiply() {
 bool Symbol::CheckInvalid() const {
   bool returnvalue = false;  // false means no, not invalid
 
- // code goes here
+  // code goes here
 
   return returnvalue;
 }
